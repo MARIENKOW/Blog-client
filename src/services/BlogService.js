@@ -13,7 +13,13 @@ export default class BlogService {
          return res;
       };
       this.getAll = async (page = null) => {
-         const res = await axios.get(BLOG_API_URL + "/",{params:{page}});
+         if (this.CancelToken) this.CancelToken.abort();
+         const controller = new AbortController();
+         this.CancelToken = controller;
+         const res = await axios.get(BLOG_API_URL + "/", {
+            params: { page },
+            signal: controller.signal,
+         });
          return res;
       };
 

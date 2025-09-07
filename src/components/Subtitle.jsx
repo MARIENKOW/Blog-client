@@ -1,0 +1,18 @@
+import { Typography } from "@mui/material";
+import { grey } from "@mui/material/colors";
+
+export const Subtitile = ({ text }) => {
+    return (
+        <Typography
+            mb={4}
+            textTransform={"uppercase"}
+            variant="body1"
+            textAlign={"right"}
+            fontSize={"32"}
+            fontWeight={"700"}
+            sx={{ color: grey[600] }}
+        >
+            {text}
+        </Typography>
+    );
+};

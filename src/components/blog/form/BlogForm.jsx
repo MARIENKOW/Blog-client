@@ -13,6 +13,8 @@ import dayjs from "dayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { ruRU } from '@mui/x-date-pickers/locales';
+import 'dayjs/locale/ru';
 
 import {
     POST_BODY_MAX_LENGTH,
@@ -20,7 +22,7 @@ import {
     POST_TITLE_MAX_LENGTH,
     POST_TITLE_MIN_LENGTH,
 } from "../../../configs/validateConfig";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 
 const BlogForm = ({ data = {}, onSubmit, btn = "Опублікувати" }) => {
     const [body, setBody] = useState(data?.body || null);
@@ -113,6 +115,8 @@ const BlogForm = ({ data = {}, onSubmit, btn = "Опублікувати" }) => 
                             return (
                                 <LocalizationProvider
                                     dateAdapter={AdapterDayjs}
+                                    adapterLocale="ru"
+                                    localeText={ruRU.components.MuiLocalizationProvider.defaultProps.localeText}
                                 >
                                     <DatePicker
                                         onChange={(v) => {

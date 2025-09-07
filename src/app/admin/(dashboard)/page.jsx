@@ -24,7 +24,7 @@ export default function Page() {
                 >
                     <Link href={ADMIN_BLOG_CREATE_ROUTE}>
                         <Button fullWidth variant="contained">
-                            Додати
+                            Добавить
                         </Button>
                     </Link>
                 </Box>
