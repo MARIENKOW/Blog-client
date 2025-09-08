@@ -4,7 +4,8 @@ import { grey } from "@mui/material/colors";
 export const Subtitile = ({ text }) => {
     return (
         <Typography
-            mb={4}
+            mb={3}
+            mr={1}
             textTransform={"uppercase"}
             variant="body1"
             textAlign={"right"}

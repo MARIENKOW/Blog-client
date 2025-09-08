@@ -8,7 +8,7 @@ import { grey } from "@mui/material/colors";
 
 export const BlogItemContent = ({ Blog }) => {
     return (
-        <CardContent className={style.text} sx={{ flex: "1" }}>
+        <CardContent  className={style.text} sx={{ flex: "1",display:'flex',flexDirection:'column' ,justifyContent:'space-between',paddingBottom:'0px !important'}}>
             <Grid spacing={2} sx={{ mb: "20px" }} container columns={2}>
                 <Grid size={{ xs: 2, sm: 2 }}>
                     <CardMedia
@@ -54,11 +54,12 @@ export const BlogItemContent = ({ Blog }) => {
                 </Grid>
             </Grid>
             <Typography
+            flex={1}
                 component={"div"}
                 dangerouslySetInnerHTML={{ __html: Blog?.body }}
                 variant="body2"
                 color="text.secondary"
-                sx={{ maxHeight: "80px", overflow: "hidden" }}
+                sx={{ maxHeight: "86px", overflow: "hidden" }}
             />
         </CardContent>
     );

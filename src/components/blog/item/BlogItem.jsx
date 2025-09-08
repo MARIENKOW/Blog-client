@@ -11,15 +11,22 @@ import EditIcon from "@mui/icons-material/Edit";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import Link from "next/link";
 import { BlogItemContent } from "./BlogItemContent";
-
+import * as React from "react";
+import { StarCheckbox } from "./StarCheckbox";
 import {
     ADMIN_BLOG_UPDATE_ROUTE,
     BLOG_ROUTE,
 } from "../../../configs/routerLinks";
+import { enqueueSnackbar } from "notistack";
+import BlogService from "../../../services/BlogService";
+import { CanceledError } from "axios";
+
+const blogImportant = new BlogService();
 
 const BlogItem = ({ Blog, deletePost }) => {
     const [anchorEl, setAnchorEl] = useState(null);
     const menu = Boolean(anchorEl);
+    const [checked, setChecked] = useState(!!Blog.is_important);
 
     const handleClose = () => {
         setAnchorEl(null);
@@ -27,12 +34,39 @@ const BlogItem = ({ Blog, deletePost }) => {
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
+    console.log(checked);
+    const changeImportant = async () => {
+        try {
+            await blogImportant.setImportant(Blog.id, {
+                is_important: !checked,
+            });
+            setChecked((v) => !v);
+            enqueueSnackbar("Статус новости изменен", {
+                variant: "success",
+            });
+        } catch (error) {
+            if (error instanceof CanceledError) return;
+            enqueueSnackbar("Упс! что-то пошло не так", {
+                variant: "error",
+            });
+        }
+    };
 
-    if (!Blog) return "sdfsdf";
+    if (!Blog) return "";
     return (
         <Card sx={{ height: "100%", display: "flex", flexDirection: "column" }}>
             <CardHeader
-                sx={{ bgcolor: grey[900] }}
+                sx={{
+                    bgcolor: grey[900],
+                    p: "10px !important",
+                    "& .MuiCardHeader-action": {
+                        marginTop: "0px !important",
+                        marginBottom: "0px !important",
+                    },
+                }}
+                avatar={
+                    <StarCheckbox getData={changeImportant} checked={checked} />
+                }
                 action={
                     <IconButton
                         aria-label="more"

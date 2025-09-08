@@ -19,8 +19,6 @@ export const BlogsUser = ({ data }) => {
     const [paginationInfo, setpaginationInfo] = useState({ ...data.info });
     console.log(paginationInfo);
     return (
-        <WithTitleWrapper title={"Новости Израиля"}>
-            <ContainerComponent>
                 <Box>
                     <Subtitile text={"Все новости"} />
                     <Box display={"flex"} flexDirection={"column"} gap={7}>
@@ -61,7 +59,5 @@ export const BlogsUser = ({ data }) => {
                         />
                     </Box>
                 </Box>
-            </ContainerComponent>
-        </WithTitleWrapper>
     );
 };

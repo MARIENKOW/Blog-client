@@ -10,43 +10,43 @@ import { StyledLink } from "./StyledLink";
 import Link from "next/link";
 
 export default function BreadcrumbsComponent({
-   main = true,
-   options,
-   sx = {},
+    main = true,
+    options,
+    sx = {},
 }) {
-   const theme = useTheme();
-   return (
-      <Breadcrumbs
-         maxItems={3}
-         separator={<NavigateNextIcon color="secondary" fontSize="small" />}
-         aria-label="breadcrumb"
-         sx={sx}
-      >
-         {main && (
-            <Link href={ADMIN_ROUTE}>
-               <StyledLink>
-                  <HomeIcon sx={{ mr: 0.5 }} fontSize="small" />
-                  Главная
-               </StyledLink>
-            </Link>
-         )}
-         {options?.map((e, i, arr) =>
-            i !== arr.length - 1 ? (
-               <Link href={e?.link} key={new Date()}>
-                  <StyledLink>
-                     {e?.icon}
-                     {e?.name}
-                  </StyledLink>
-               </Link>
-            ) : (
-               <Typography
-                  key={new Date()}
-                  color={theme.palette.secondary.light}
-               >
-                  {e?.name}
-               </Typography>
-            )
-         )}
-      </Breadcrumbs>
-   );
+    const theme = useTheme();
+    return (
+        <Breadcrumbs
+            maxItems={3}
+            separator={<NavigateNextIcon color="secondary" fontSize="small" />}
+            aria-label="breadcrumb"
+            sx={sx}
+        >
+            {main && (
+                <Link href={ADMIN_ROUTE}>
+                    <StyledLink>
+                        <HomeIcon sx={{ mr: 0.5 }} fontSize="small" />
+                        Главная
+                    </StyledLink>
+                </Link>
+            )}
+            {options?.map((e, i, arr) =>
+                i !== arr.length - 1 ? (
+                    <Link href={e?.link} key={new Date()}>
+                        <StyledLink>
+                            {e?.icon}
+                            {e?.name}
+                        </StyledLink>
+                    </Link>
+                ) : (
+                    <Typography
+                        key={new Date()}
+                        color={theme.palette.secondary.light}
+                    >
+                        {e?.name}
+                    </Typography>
+                )
+            )}
+        </Breadcrumbs>
+    );
 }
