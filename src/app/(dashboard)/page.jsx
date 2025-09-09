@@ -7,6 +7,9 @@ import { BlogsUser } from "../../components/blog/BlogsUser";
 import { Box } from "@mui/material";
 import { BlogItemMain } from "../../components/blog/item/BlogItemMain";
 import { ContainerComponent } from "../../components/wrappers/ContainerComponent";
+import { BlogsImportant } from "../../components/blog/BlogsImportant";
+import { BlogsShort } from "../../components/blog/BlogsShort";
+import { Map } from "../../components/Map";
 
 export const dynamic = "force-dynamic";
 
@@ -29,12 +32,17 @@ export default async function Page() {
 
         return (
             <WithTitleWrapper title={"Новости Израиля"}>
-                <ContainerComponent>
-                    <Box display={"flex"} flexDirection={"column"} gap={7}>
+                <Box display={"flex"} flexDirection={"column"} gap={7}>
+                    <BlogsShort />
+                    <ContainerComponent sx={{ p: { xs: 0, md: 2 } }}>
                         <BlogItemMain Blog={dataMain} />
-                        <BlogsUser data={data} />;
-                    </Box>
-                </ContainerComponent>
+                    </ContainerComponent>
+                    <BlogsImportant />
+                    <ContainerComponent>
+                        <BlogsUser data={data} />
+                    </ContainerComponent>
+                    <Map />
+                </Box>
             </WithTitleWrapper>
         );
     } catch (error) {

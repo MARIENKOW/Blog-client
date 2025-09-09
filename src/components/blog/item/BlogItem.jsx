@@ -2,13 +2,14 @@ import Card from "@mui/material/Card";
 import Typography from "@mui/material/Typography";
 import { Menu, MenuItem, ListItemIcon, Grid2 as Grid } from "@mui/material";
 import { CardHeader } from "@mui/material";
-import { grey, red } from "@mui/material/colors";
+import { grey, orange, red } from "@mui/material/colors";
 import { useState } from "react";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import IconButton from "@mui/material/IconButton";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import EditIcon from "@mui/icons-material/Edit";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
+import VerifiedIcon from "@mui/icons-material/Verified";
 import Link from "next/link";
 import { BlogItemContent } from "./BlogItemContent";
 import * as React from "react";
@@ -23,7 +24,7 @@ import { CanceledError } from "axios";
 
 const blogImportant = new BlogService();
 
-const BlogItem = ({ Blog, deletePost }) => {
+const BlogItem = ({ Blog, deletePost, deleteMainPost, setMainPost }) => {
     const [anchorEl, setAnchorEl] = useState(null);
     const menu = Boolean(anchorEl);
     const [checked, setChecked] = useState(!!Blog.is_important);
@@ -54,7 +55,15 @@ const BlogItem = ({ Blog, deletePost }) => {
 
     if (!Blog) return "";
     return (
-        <Card sx={{ height: "100%", display: "flex", flexDirection: "column" }}>
+        <Card
+            sx={{
+                height: "100%",
+                display: "flex",
+                flexDirection: "column",
+                bgcolor: Blog?.is_main ? orange[100] : "transparent",
+                boxShadow: "none",
+            }}
+        >
             <CardHeader
                 sx={{
                     bgcolor: grey[900],
@@ -90,6 +99,43 @@ const BlogItem = ({ Blog, deletePost }) => {
                 anchorEl={anchorEl}
                 sx={{ paddingBottom: 0 }}
             >
+                {Blog?.is_main ? (
+                    <MenuItem
+                        sx={{ color: orange[900], bgcolor: orange[50] }}
+                        onClick={() => {
+                            handleClose();
+                            deleteMainPost(Blog?.id);
+                        }}
+                    >
+                        <ListItemIcon sx={{ color: orange[900] }}>
+                            <VerifiedIcon />
+                        </ListItemIcon>
+                        <Typography
+                            textTransform="capitalize"
+                            textAlign="center"
+                        >
+                            Снять главную новость
+                        </Typography>
+                    </MenuItem>
+                ) : (
+                    <MenuItem
+                        sx={{ color: orange[900], bgcolor: orange[50] }}
+                        onClick={() => {
+                            handleClose();
+                            setMainPost(Blog?.id);
+                        }}
+                    >
+                        <ListItemIcon sx={{ color: orange[900] }}>
+                            <VerifiedIcon />
+                        </ListItemIcon>
+                        <Typography
+                            textTransform="capitalize"
+                            textAlign="center"
+                        >
+                            Сделать главной новостью
+                        </Typography>
+                    </MenuItem>
+                )}
                 <Link target="_blank" href={BLOG_ROUTE + "/" + Blog?.id}>
                     <MenuItem onClick={handleClose}>
                         <ListItemIcon>
@@ -106,7 +152,6 @@ const BlogItem = ({ Blog, deletePost }) => {
                         Редактировать
                     </MenuItem>
                 </Link>
-
                 <MenuItem
                     sx={{ color: red[900], bgcolor: red[50] }}
                     onClick={() => {

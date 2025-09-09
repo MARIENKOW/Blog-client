@@ -14,6 +14,9 @@ import { CanceledError } from "axios";
 import Pagination from "../../components/Pagination";
 
 const blog = new BlogService();
+const blogDelete = new BlogService();
+const blogSetMain = new BlogService();
+const blogDeleteMain = new BlogService();
 
 export default function Blogs() {
     const [loading, setLoading] = useState(true);
@@ -53,7 +56,7 @@ export default function Blogs() {
         if (!agree) return;
         setOpenBackdrop(true);
         try {
-            await blog.delete(id);
+            await blogDelete.delete(id);
             enqueueSnackbar(`Новость "${name}" удалено`, {
                 variant: "success",
             });
@@ -80,6 +83,58 @@ export default function Blogs() {
             setOpenBackdrop(false);
         }
     };
+    const handleClickSetMain = async (id) => {
+        setOpenBackdrop(true);
+        try {
+            await blogSetMain.setMain(id);
+            enqueueSnackbar(`Главная новость выбрана`, {
+                variant: "success",
+            });
+            try {
+                await getAllBlogs();
+                window.scrollTo(0, 0);
+            } catch (e) {
+                console.dir(e);
+                enqueueSnackbar(
+                    "Упс! что-то пошло не так. Перезагрузите страницу",
+                    {
+                        variant: "error",
+                    }
+                );
+            }
+        } catch (e) {
+            console.dir(e);
+            enqueueSnackbar("Упс! что-то пошло не так", { variant: "error" });
+        } finally {
+            setOpenBackdrop(false);
+        }
+    };
+    const handleClickDeleteMain = async (id) => {
+        setOpenBackdrop(true);
+        try {
+            await blogDeleteMain.deleteMain(id);
+            enqueueSnackbar(`Главная новость снята`, {
+                variant: "success",
+            });
+            try {
+                await getAllBlogs();
+                window.scrollTo(0, 0);
+            } catch (e) {
+                console.dir(e);
+                enqueueSnackbar(
+                    "Упс! что-то пошло не так. Перезагрузите страницу",
+                    {
+                        variant: "error",
+                    }
+                );
+            }
+        } catch (e) {
+            console.dir(e);
+            enqueueSnackbar("Упс! что-то пошло не так", { variant: "error" });
+        } finally {
+            setOpenBackdrop(false);
+        }
+    };
 
     return (
         <Box display={"flex"} flexDirection={"column"} gap={1}>
@@ -88,8 +143,9 @@ export default function Blogs() {
                     <Grid2 key={Blog?.id} size={{ xs: 2, md: 1 }}>
                         <BlogItem
                             deletePost={handleClickDelite}
+                            setMainPost={handleClickSetMain}
+                            deleteMainPost={handleClickDeleteMain}
                             Blog={Blog}
-                            key={Blog?.id}
                         />
                     </Grid2>
                 ))}

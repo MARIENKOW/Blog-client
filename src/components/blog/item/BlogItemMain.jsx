@@ -14,14 +14,18 @@ export const BlogItemMain = ({ Blog }) => {
     if (!Blog) return "";
     return (
         <Box>
-            <Subtitile text={"Главная новость"} />
+            <Box pr={2}>
+                <Subtitile text={"Главная новость"} />
+            </Box>
 
             <Card
                 sx={{
-                    height: "100%",
+                    // height: "100%",
                     display: "flex",
                     flexDirection: "column",
                     p: 0,
+                    bgcolor: grey[100],
+                    boxShadow: "none",
                     // border: "1px solid #bebebe",
                     // borderRadius: 5,
                     // cursor: "pointer",
@@ -65,7 +69,7 @@ export const BlogItemMain = ({ Blog }) => {
                             <Typography
                                 fontWeight={"700"}
                                 gutterBottom
-                                sx={{ fontSize: { md: 42,xs:30 } }}
+                                sx={{ fontSize: { md: 42, xs: 30 } }}
                                 variant="h3"
                                 component="div"
                             >

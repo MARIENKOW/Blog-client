@@ -49,11 +49,35 @@ export default class BlogService {
             });
             return res;
         };
-
-        this.setImportant = async (id, value) => {
-            const res = await $api.put(BLOG_API_URL + "/important/" + id, value, {
+        this.setMain = async (id) => {
+            if (this.CancelToken) this.CancelToken.abort();
+            const controller = new AbortController();
+            this.CancelToken = controller;
+            const res = await $api.put(BLOG_API_URL + "/main/" + id, {
+                signal: controller.signal,
                 headers: { "Content-Type": "multipart/form-data" },
             });
+            return res;
+        };
+        this.deleteMain = async (id) => {
+            if (this.CancelToken) this.CancelToken.abort();
+            const controller = new AbortController();
+            this.CancelToken = controller;
+            const res = await $api.delete(BLOG_API_URL + "/main/" + id, {
+                signal: controller.signal,
+                headers: { "Content-Type": "multipart/form-data" },
+            });
+            return res;
+        };
+
+        this.setImportant = async (id, value) => {
+            const res = await $api.put(
+                BLOG_API_URL + "/important/" + id,
+                value,
+                {
+                    headers: { "Content-Type": "multipart/form-data" },
+                }
+            );
             return res;
         };
         this.update = async (id, value) => {

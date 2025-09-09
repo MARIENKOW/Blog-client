@@ -1,17 +1,11 @@
-import style from "./BlogItem.module.scss";
 import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import Typography from "@mui/material/Typography";
-import { Grid2 as Grid } from "@mui/material";
 import Link from "next/link";
 import { BLOG_ROUTE } from "../../../configs/routerLinks";
-import DatePharse from "../../../components/DatePharse";
-import { grey } from "@mui/material/colors";
 import { BlogItemContent } from "./BlogItemContent";
+import { grey } from "@mui/material/colors";
 
 const BlogItemUser = ({ Blog }) => {
-    if (!Blog) return "sdfsdf";
+    if (!Blog) return "";
     return (
         <Link href={BLOG_ROUTE + "/" + Blog?.id}>
             <Card
@@ -19,10 +13,12 @@ const BlogItemUser = ({ Blog }) => {
                     height: "100%",
                     display: "flex",
                     flexDirection: "column",
-                    border: "1px solid #bebebe",
+                    // border: "1px solid #bebebe",
                     borderRadius: 5,
                     cursor: "pointer",
+                    bgcolor:grey[100],
                     transition: ".2s",
+                    boxShadow:'none',
                     "&:hover": {
                         transform: "scale(1.01)",
                     },
