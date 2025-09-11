@@ -23,6 +23,12 @@ import Image from "@tiptap/extension-image";
 import { red } from "@mui/material/colors";
 import { useCallback } from "react";
 import CustomImage from "./CustomImg";
+import { Video } from "./extensions/Video";
+import VideoButton from "./buttons/VideoButton";
+import FontsButton from "./buttons/FontsButton";
+import Link from "@tiptap/extension-link";
+import SizeButton from "./buttons/SizeButton";
+import LinkIcon from "@mui/icons-material/Link";
 
 const Tiptap = ({ error, value, onChange, setBody }) => {
     const theme = useTheme();
@@ -31,8 +37,14 @@ const Tiptap = ({ error, value, onChange, setBody }) => {
         extensions: [
             StarterKit,
             FontFamily,
+            Video,
             TextStyle,
             Underline,
+            Link.configure({
+                openOnClick: false, // чтобы не открывалось сразу при клике
+                autolink: true, // автоматом превращает http://... в ссылки
+                protocols: ["http", "https", "mailto"],
+            }),
             // Image.configure({
             //    HTMLAttributes: {
             //       class: "my-custom-paragraph",
@@ -43,6 +55,33 @@ const Tiptap = ({ error, value, onChange, setBody }) => {
                 types: ["heading", "paragraph"],
             }),
         ],
+        editorProps: {
+            handleKeyDown(view, event) {
+                if (event.key === "Backspace" || event.key === "Delete") {
+                    const { selection } = view.state;
+                    const node = selection.node;
+
+                    if (node?.type?.name === "video") {
+                        // if (!confirm("Удалить видео?")) {
+                        //     return true; // блокируем
+                        // }
+                        return true; // блокируем
+                    }
+                }
+                return false; // стандартное поведение
+            },
+            handleTextInput(view, from, to, text) {
+                const { selection } = view.state;
+                const node = selection.node;
+
+                if (node?.type?.name === "video") {
+                    // блокируем замену текста
+                    return true;
+                }
+
+                return false;
+            },
+        },
         content: value,
         immediatelyRender: false,
         onUpdate({ editor }) {
@@ -70,13 +109,21 @@ const Tiptap = ({ error, value, onChange, setBody }) => {
                     borderRadius: 4,
                 }}
             >
-                <Box>
+                <Box
+                    pt={"3px"}
+                    // pl={1}
+                    // pr={1}
+                    display={"flex"}
+                    alignItems={"center"}
+                    flexWrap={"wrap"}
+                >
                     <IconButton
                         // color={editor?.isActive("bold") ? "primary" : "secondary"}
                         onClick={addImage}
                     >
-                        Img
+                        img
                     </IconButton>
+                    <VideoButton editor={editor} />
                     <IconButton
                         color={
                             editor?.isActive("bold") ? "primary" : "secondary"
@@ -127,103 +174,53 @@ const Tiptap = ({ error, value, onChange, setBody }) => {
                     >
                         <FormatClearIcon />
                     </IconButton>
+                    <IconButton
+                        color={"secondary"}
+                        // color={editor?.isActive("bold") ? "primary" : "secondary"}
+                        onClick={() => {
+                            const previousUrl =
+                                editor.getAttributes("link").href;
+                            const url = window.prompt(
+                                "Введите ссылку",
+                                previousUrl || "https://"
+                            );
 
-                    <IconButton
-                        color={
-                            editor?.isActive("heading", { level: 6 })
-                                ? "primary"
-                                : "secondary"
-                        }
-                        onClick={() =>
-                            editor
-                                .chain()
-                                .focus()
-                                .toggleHeading({ level: 6 })
-                                .run()
-                        }
+                            if (url === null) return; // отменили окно
+
+                            if (url === "") {
+                                // убираем ссылку
+                                editor
+                                    .chain()
+                                    .focus()
+                                    .extendMarkRange("link")
+                                    .unsetLink()
+                                    .run();
+                                return;
+                            }
+
+                            if (editor.state.selection.empty) {
+                                // если текста нет — вставляем саму ссылку как текст
+                                editor
+                                    .chain()
+                                    .focus()
+                                    .insertContent(
+                                        `<a href="${url}">${url}</a>`
+                                    )
+                                    .run();
+                            } else {
+                                // если есть выделение — делаем его ссылкой
+                                editor
+                                    .chain()
+                                    .focus()
+                                    .extendMarkRange("link")
+                                    .setLink({ href: url })
+                                    .run();
+                            }
+                        }}
                     >
-                        h6
+                        <LinkIcon />
                     </IconButton>
-                    <IconButton
-                        color={
-                            editor?.isActive("heading", { level: 5 })
-                                ? "primary"
-                                : "secondary"
-                        }
-                        onClick={() =>
-                            editor
-                                .chain()
-                                .focus()
-                                .toggleHeading({ level: 5 })
-                                .run()
-                        }
-                    >
-                        h5
-                    </IconButton>
-                    <IconButton
-                        color={
-                            editor?.isActive("heading", { level: 4 })
-                                ? "primary"
-                                : "secondary"
-                        }
-                        onClick={() =>
-                            editor
-                                .chain()
-                                .focus()
-                                .toggleHeading({ level: 4 })
-                                .run()
-                        }
-                    >
-                        h4
-                    </IconButton>
-                    <IconButton
-                        color={
-                            editor?.isActive("heading", { level: 3 })
-                                ? "primary"
-                                : "secondary"
-                        }
-                        onClick={() =>
-                            editor
-                                .chain()
-                                .focus()
-                                .toggleHeading({ level: 3 })
-                                .run()
-                        }
-                    >
-                        h3
-                    </IconButton>
-                    <IconButton
-                        color={
-                            editor?.isActive("heading", { level: 2 })
-                                ? "primary"
-                                : "secondary"
-                        }
-                        onClick={() =>
-                            editor
-                                .chain()
-                                .focus()
-                                .toggleHeading({ level: 2 })
-                                .run()
-                        }
-                    >
-                        h2
-                    </IconButton>
-                    <IconButton
-                        color={
-                            editor?.isActive("heading", { level: 1 })
-                                ? "primary"
-                                : "secondary"
-                        }
-                        onClick={() =>
-                            editor
-                                .chain()
-                                .focus()
-                                .toggleHeading({ level: 1 })
-                                .run()
-                        }
-                    >
-                        h1
-                    </IconButton>
+                    <SizeButton editor={editor} />
                     <IconButton
                         color={
                             editor?.isActive("bulletList")
@@ -248,121 +245,57 @@ const Tiptap = ({ error, value, onChange, setBody }) => {
                     >
                         <FormatListNumberedIcon />
                     </IconButton>
-                    <IconButton
-                        sx={{ fontFamily: "Inter" }}
-                        color={
-                            editor?.isActive("textStyle", {
-                                fontFamily: "Inter",
-                            })
-                                ? "primary"
-                                : "secondary"
-                        }
-                        onClick={() =>
-                            editor.chain().focus().setFontFamily("Inter").run()
-                        }
-                    >
-                        Inter
-                    </IconButton>
-                    <IconButton
-                        sx={{ fontFamily: "Comic Sans MS, Comic Sans" }}
-                        color={
-                            editor?.isActive("textStyle", {
-                                fontFamily: "Comic Sans MS, Comic Sans",
-                            })
-                                ? "primary"
-                                : "secondary"
-                        }
-                        onClick={() =>
-                            editor
-                                .chain()
-                                .focus()
-                                .setFontFamily("Comic Sans MS, Comic Sans")
-                                .run()
-                        }
-                    >
-                        Comic Sans
-                    </IconButton>
-                    <IconButton
-                        sx={{ fontFamily: "Monospace" }}
-                        color={
-                            editor?.isActive("textStyle", {
-                                fontFamily: "monospace",
-                            })
-                                ? "primary"
-                                : "secondary"
-                        }
-                        onClick={() =>
-                            editor
-                                .chain()
-                                .focus()
-                                .setFontFamily("monospace")
-                                .run()
-                        }
-                    >
-                        Monospace
-                    </IconButton>
-                    <IconButton
-                        sx={{ fontFamily: "cursive" }}
-                        color={
-                            editor?.isActive("textStyle", {
-                                fontFamily: "cursive",
-                            })
-                                ? "primary"
-                                : "secondary"
-                        }
-                        onClick={() =>
-                            editor
-                                .chain()
-                                .focus()
-                                .setFontFamily("cursive")
-                                .run()
-                        }
-                    >
-                        Cursive
-                    </IconButton>
-                    <IconButton
-                        onClick={() =>
-                            editor.chain().focus().unsetFontFamily().run()
-                        }
-                    >
-                        Default
-                    </IconButton>
-                    <IconButton
-                        color={
-                            editor?.isActive({ textAlign: "left" })
-                                ? "primary"
-                                : "secondary"
-                        }
-                        onClick={() =>
-                            editor.chain().focus().setTextAlign("left").run()
-                        }
-                    >
-                        <FormatAlignLeftIcon />
-                    </IconButton>
-                    <IconButton
-                        color={
-                            editor?.isActive({ textAlign: "center" })
-                                ? "primary"
-                                : "secondary"
-                        }
-                        onClick={() =>
-                            editor.chain().focus().setTextAlign("center").run()
-                        }
-                    >
-                        <FormatAlignCenterIcon />
-                    </IconButton>
-                    <IconButton
-                        color={
-                            editor?.isActive({ textAlign: "right" })
-                                ? "primary"
-                                : "secondary"
-                        }
-                        onClick={() =>
-                            editor.chain().focus().setTextAlign("right").run()
-                        }
-                    >
-                        <FormatAlignRightIcon />
-                    </IconButton>
+                    <FontsButton editor={editor} />
+                    <Box display={"inline-block"}>
+                        <IconButton
+                            color={
+                                editor?.isActive({ textAlign: "left" })
+                                    ? "primary"
+                                    : "secondary"
+                            }
+                            onClick={() =>
+                                editor
+                                    .chain()
+                                    .focus()
+                                    .setTextAlign("left")
+                                    .run()
+                            }
+                        >
+                            <FormatAlignLeftIcon />
+                        </IconButton>
+                        <IconButton
+                            color={
+                                editor?.isActive({ textAlign: "center" })
+                                    ? "primary"
+                                    : "secondary"
+                            }
+                            onClick={() =>
+                                editor
+                                    .chain()
+                                    .focus()
+                                    .setTextAlign("center")
+                                    .run()
+                            }
+                        >
+                            <FormatAlignCenterIcon />
+                        </IconButton>
+                        <IconButton
+                            color={
+                                editor?.isActive({ textAlign: "right" })
+                                    ? "primary"
+                                    : "secondary"
+                            }
+                            onClick={() =>
+                                editor
+                                    .chain()
+                                    .focus()
+                                    .setTextAlign("right")
+                                    .run()
+                            }
+                        >
+                            <FormatAlignRightIcon />
+                        </IconButton>
+                    </Box>
                 </Box>
                 <EditorContent
                     style={{

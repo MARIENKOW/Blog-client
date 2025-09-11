@@ -26,7 +26,7 @@ export default function () {
 
     const handleDelete = async () => {
         try {
-            console.log('object');
+            console.log("object");
             setLoading(true);
             await video.delete(imgId);
             setImagePreview(null);
