@@ -1,13 +1,8 @@
 import { Box, Button } from "@mui/material";
 import Link from "next/link";
-import {
-    ADMIN_BLOG_CREATE_ROUTE,
-    ADMIN_BLOG_ROUTE,
-    ADMIN_PRODUCTLINE_CREATE_ROUTE,
-} from "../../../configs/routerLinks";
+import { ADMIN_BLOG_CREATE_ROUTE } from "../../../configs/routerLinks";
 import { ContainerComponent } from "../../../components/wrappers/ContainerComponent";
 import Blogs from "../../../components/blog/Blogs";
-import BreadcrumbsComponent from "../../../components/BreadcrumbsComponent";
 
 export default function Page() {
     return (

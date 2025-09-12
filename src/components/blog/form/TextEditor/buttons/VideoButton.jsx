@@ -1,27 +1,32 @@
 import { CircularProgress, IconButton } from "@mui/material";
 import VideoService from "../../../../../services/VideoService";
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { enqueueSnackbar } from "notistack";
+import { VideosIdContext } from "../../BlogForm";
 
 const video = new VideoService();
 
 export default function VideoButton({ editor }) {
     const fileInputRef = useRef();
     const [loading, setLoading] = useState(false);
+    const {setVideos_id} = useContext(VideosIdContext)
 
     const loadVideo = async (body, event) => {
         try {
             setLoading(true);
             const { data } = await video.create({ video: body });
+            setVideos_id((prevArr) => [...prevArr, data.id]);
             editor
                 .chain()
                 .focus()
                 .setVideo({
                     src: data.path,
                     "data-id": data.id,
+                    poster: data.poster,
                 })
                 .run();
         } catch (e) {
+            console.log(e);
             enqueueSnackbar("Упс! что-то пошло не так", { variant: "error" });
         } finally {
             event.target.value = "";

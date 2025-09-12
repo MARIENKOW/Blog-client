@@ -16,13 +16,12 @@ export default function () {
 
     const onSubmit = (body, setError) => async (data) => {
         try {
-            console.log({ ...data, body });
             await blog.create({
                 ...data,
-                body,
+                ...body,
                 date: data?.date?.format("YYYY-MM-DD") || null,
             });
-            enqueueSnackbar(`Блог додано!`, { variant: "success" });
+            enqueueSnackbar(`Новость добавлено!`, { variant: "success" });
             router.push(ADMIN_BLOG_ROUTE);
         } catch (e) {
             console.error(e);
@@ -35,7 +34,7 @@ export default function () {
             }
             setError("root.server", {
                 type: "server",
-                message: "Упс! щось пішло не так, спробуйте пізніше",
+                message: "Упс! Что-то пошло не так, попрорбуйте позже",
             });
         }
     };
@@ -44,8 +43,8 @@ export default function () {
         <ContainerComponent>
             <BreadcrumbsComponent
                 options={[
-                    { name: "Блог", link: ADMIN_BLOG_ROUTE },
-                    { name: "Додати" },
+                    // { name: "Блог", link: ADMIN_BLOG_ROUTE },
+                    { name: "Добавить" },
                 ]}
             />
             <Box mt={5}>

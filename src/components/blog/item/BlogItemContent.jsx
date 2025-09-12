@@ -26,7 +26,7 @@ export const BlogItemContent = ({ Blog }) => {
                             width: "100%",
                             aspectRatio: 3 / 1,
                         }}
-                        image={Blog?.img?.path || "../default.png"}
+                        image={Blog?.img?.path || "/default.png"}
                         title="BlogImage"
                     />
                 </Grid>

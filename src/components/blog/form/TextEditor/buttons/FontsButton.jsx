@@ -18,7 +18,7 @@ export default function FontsButton({ editor }) {
     };
 
     React.useEffect(() => {
-        setAge(editor?.getAttributes("textStyle")?.fontFamily || '');
+        setAge(editor?.getAttributes("textStyle")?.fontFamily || "");
     }, [editor?.getAttributes("textStyle")?.fontFamily]);
 
     return (
@@ -38,90 +38,25 @@ export default function FontsButton({ editor }) {
                     // displayEmpty
                     onChange={handleChange}
                 >
-                    <MenuItem
-                        sx={{ fontFamily: "Inter" }}
-                        // color={
-                        //     editor?.isActive("textStyle", {
-                        //         fontFamily: "Inter",
-                        //     })
-                        //         ? "primary"
-                        //         : "secondary"
-                        // }
-                        // onClick={() =>
-                        //     editor.chain().focus().setFontFamily("Inter").run()
-                        // }
-                        value={"Inter"}
-                    >
+                    <MenuItem sx={{ fontFamily: "Inter" }} value={"Inter"}>
                         Inter
                     </MenuItem>
                     <MenuItem
                         sx={{ fontFamily: "Comic Sans MS, Comic Sans" }}
-                        // color={
-                        //     editor?.isActive("textStyle", {
-                        //         fontFamily: "Comic Sans MS, Comic Sans",
-                        //     })
-                        //         ? "primary"
-                        //         : "secondary"
-                        // }
-                        // onClick={() =>
-                        //     editor
-                        //         .chain()
-                        //         .focus()
-                        //         .setFontFamily("Comic Sans MS, Comic Sans")
-                        //         .run()
-                        // }
                         value={"Comic Sans"}
                     >
                         Comic Sans
                     </MenuItem>
                     <MenuItem
                         sx={{ fontFamily: "Monospace" }}
-                        // color={
-                        //     editor?.isActive("textStyle", {
-                        //         fontFamily: "monospace",
-                        //     })
-                        //         ? "primary"
-                        //         : "secondary"
-                        // }
-                        // onClick={() =>
-                        //     editor
-                        //         .chain()
-                        //         .focus()
-                        //         .setFontFamily("monospace")
-                        //         .run()
-                        // }
                         value={"Monospace"}
                     >
                         Monospace
                     </MenuItem>
-                    <MenuItem
-                        value={"Cursive"}
-                        // sx={{ fontFamily: "cursive" }}
-                        // color={
-                        //     editor?.isActive("textStyle", {
-                        //         fontFamily: "cursive",
-                        //     })
-                        //         ? "primary"
-                        //         : "secondary"
-                        // }
-                        // onClick={() =>
-                        //     editor
-                        //         .chain()
-                        //         .focus()
-                        //         .setFontFamily("cursive")
-                        //         .run()
-                        // }
-                    >
+                    <MenuItem value={"Cursive"} sx={{ fontFamily: "cursive" }}>
                         Cursive
                     </MenuItem>
-                    <MenuItem
-                        value={"Default"}
-                        // onClick={() =>
-                        //     editor.chain().focus().unsetFontFamily().run()
-                        // }
-                    >
-                        Default
-                    </MenuItem>
+                    <MenuItem value={"Default"}>Default</MenuItem>
                 </Select>
             </FormControl>
         </Box>

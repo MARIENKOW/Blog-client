@@ -6,21 +6,29 @@ import {
     ReactNodeViewRenderer,
 } from "@tiptap/react";
 import HighlightOffTwoToneIcon from "@mui/icons-material/HighlightOffTwoTone";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import VideoService from "../../../../../services/VideoService";
 import { enqueueSnackbar } from "notistack";
+import { VideosIdContext } from "../../BlogForm";
 
 const video = new VideoService();
 
 const VideoComponent = (props) => {
     const { node, editor, getPos } = props;
     const [loading, setLoading] = useState();
+    const { setVideos_id } = useContext(VideosIdContext);
 
     const handleDelete = async () => {
         try {
             if (!confirm("Удалить видео?")) return;
             setLoading(true);
-            await video.delete(node.attrs["data-id"]);
+            const { data: id } = await video.delete(node.attrs["data-id"]);
+            setVideos_id((prev) => {
+                const next = prev.filter((el) => el != id);
+                console.log(id);
+                console.log(next);
+                return next;
+            });
             editor
                 .chain()
                 .focus()
@@ -42,15 +50,15 @@ const VideoComponent = (props) => {
         }
     };
 
-    console.log(node);
-
     return (
         <NodeViewWrapper className=" inline-block">
             <div style={{ position: "relative" }}>
                 <video
                     src={node.attrs.src}
                     data-id={node.attrs["data-id"]}
+                    poster={node.attrs.poster}
                     controls
+                    preload="none"
                     width={"100%"}
                     // className="rounded-md max-w-full"
                 />
@@ -96,6 +104,7 @@ export const Video = Node.create({
             controls: { default: true },
             "data-id": { default: "" },
             width: { default: "100%" },
+            poster: { default: "/default.png" },
         };
     },
 

@@ -66,7 +66,8 @@ export default function Blogs() {
                     paginationInfo.itemsOnCurrentPage == 1
                         ? paginationInfo?.currentPage - 1
                         : paginationInfo?.currentPage;
-                await getAllBlogs(pageAfterDelete);
+                console.log(pageAfterDelete);
+                await getAllBlogs(pageAfterDelete || null);
             } catch (e) {
                 console.dir(e);
                 enqueueSnackbar(

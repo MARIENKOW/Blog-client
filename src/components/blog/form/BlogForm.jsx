@@ -13,8 +13,8 @@ import dayjs from "dayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import { ruRU } from '@mui/x-date-pickers/locales';
-import 'dayjs/locale/ru';
+import { ruRU } from "@mui/x-date-pickers/locales";
+import "dayjs/locale/ru";
 
 import {
     POST_BODY_MAX_LENGTH,
@@ -22,10 +22,15 @@ import {
     POST_TITLE_MAX_LENGTH,
     POST_TITLE_MIN_LENGTH,
 } from "../../../configs/validateConfig";
-import { useState } from "react";
+import { createContext, useState } from "react";
 
-const BlogForm = ({ data = {}, onSubmit, btn = "Опублікувати" }) => {
+export const VideosIdContext = createContext();
+
+const BlogForm = ({ data = {}, onSubmit, btn = "Опубликовать" }) => {
     const [body, setBody] = useState(data?.body || null);
+    const [videos_id, setVideos_id] = useState(data?.videos_id || []);
+
+    console.log(videos_id);
 
     const {
         handleSubmit,
@@ -49,7 +54,9 @@ const BlogForm = ({ data = {}, onSubmit, btn = "Опублікувати" }) => 
         <form
             onChange={handleChange}
             style={{ display: "flex", flexDirection: "column", gap: "15px" }}
-            onSubmit={handleSubmit(onSubmit(body, setError, dirtyFields))}
+            onSubmit={handleSubmit(
+                onSubmit({ body, videos_id }, setError, dirtyFields)
+            )}
         >
             <Grid container spacing={{ xs: 3, md: 2 }} columns={10}>
                 <Grid
@@ -116,16 +123,18 @@ const BlogForm = ({ data = {}, onSubmit, btn = "Опублікувати" }) => 
                                 <LocalizationProvider
                                     dateAdapter={AdapterDayjs}
                                     adapterLocale="ru"
-                                    localeText={ruRU.components.MuiLocalizationProvider.defaultProps.localeText}
+                                    localeText={
+                                        ruRU.components.MuiLocalizationProvider
+                                            .defaultProps.localeText
+                                    }
                                 >
                                     <DatePicker
                                         onChange={(v) => {
-                                            console.log(v);
                                             onChange(v);
                                         }}
                                         slotProps={{
                                             textField: {
-                                                error:!!error,
+                                                error: !!error,
                                                 helperText:
                                                     error?.message || "",
                                             },
@@ -157,12 +166,15 @@ const BlogForm = ({ data = {}, onSubmit, btn = "Опублікувати" }) => 
                             field: { onChange, value },
                             fieldState: { error },
                         }) => (
-                            <TextEditor
-                                onChange={onChange}
-                                error={error}
-                                value={value}
-                                setBody={setBody}
-                            />
+                            <VideosIdContext.Provider value={{ setVideos_id }}>
+                                <TextEditor
+                                    onChange={onChange}
+                                    error={error}
+                                    setVideos_id={setVideos_id}
+                                    value={value}
+                                    setBody={setBody}
+                                />
+                            </VideosIdContext.Provider>
                         )}
                     />
                 </Grid>

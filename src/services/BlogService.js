@@ -7,6 +7,7 @@ const BLOG_API_URL = config.SERVER_API + "/Blog";
 export default class BlogService {
     constructor($api = $AdminApi) {
         this.create = async (value) => {
+            console.log(value);
             const res = await $api.post(BLOG_API_URL + "/", value, {
                 headers: { "Content-Type": "multipart/form-data" },
             });
