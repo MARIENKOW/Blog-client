@@ -32,6 +32,13 @@ const BlogForm = ({ data = {}, onSubmit, btn = "Опубликовать" }) => 
 
     console.log(videos_id);
 
+    const defaultValues = {
+        body: data?.body || "",
+        img: data?.img || null,
+        title: data?.title || "",
+        date: dayjs(data?.date),
+    };
+
     const {
         handleSubmit,
         register,
@@ -39,12 +46,27 @@ const BlogForm = ({ data = {}, onSubmit, btn = "Опубликовать" }) => 
         clearErrors,
         control,
         resetField,
+        getValues,
         setValue,
-        formState: { errors, isValid, isSubmitting, isDirty, dirtyFields },
+        formState: {
+            errors,
+            isValid,
+            isSubmitting,
+            isDirty,
+            dirtyFields,
+            validatingFields,
+        },
     } = useForm({
         mode: "onChange",
-        defaultValues: { ...data, date: dayjs(data?.date) },
+        // defaultValues: { ...data, date: dayjs(data?.date) },
+        defaultValues,
     });
+
+    console.log(isDirty);
+    console.log(isValid);
+    console.log(dirtyFields);
+    console.log(validatingFields);
+    console.log(getValues());
 
     const handleChange = () => {
         clearErrors("root");
@@ -54,9 +76,7 @@ const BlogForm = ({ data = {}, onSubmit, btn = "Опубликовать" }) => 
         <form
             onChange={handleChange}
             style={{ display: "flex", flexDirection: "column", gap: "15px" }}
-            onSubmit={handleSubmit(
-                onSubmit({ body, videos_id }, setError, dirtyFields)
-            )}
+            onSubmit={handleSubmit(onSubmit({ body, videos_id }, setError))}
         >
             <Grid container spacing={{ xs: 3, md: 2 }} columns={10}>
                 <Grid
@@ -170,7 +190,7 @@ const BlogForm = ({ data = {}, onSubmit, btn = "Опубликовать" }) => 
                                 <TextEditor
                                     onChange={onChange}
                                     error={error}
-                                    setVideos_id={setVideos_id}
+                                    // setVideos_id={setVideos_id}
                                     value={value}
                                     setBody={setBody}
                                 />
@@ -187,7 +207,7 @@ const BlogForm = ({ data = {}, onSubmit, btn = "Опубликовать" }) => 
             <StyledLoadingButton
                 loading={isSubmitting}
                 endIcon={<DoubleArrowIcon />}
-                disabled={!isValid || !isDirty}
+                // disabled={!isValid || !isDirty}
                 type="submit"
                 sx={{ mt: errors?.root?.server ? 0 : 3 }}
                 variant="contained"

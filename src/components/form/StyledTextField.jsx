@@ -70,8 +70,8 @@ export const StyledTextField = ({
    register,
    label,
    options,
-   errMessage = "некоректно заповнене поле",
-   helperMessage = "необов'язкове поле",
+   errMessage = "некорректное поле",
+   helperMessage = "необязательное поле",
    helper = false,
 }) => {
    return (

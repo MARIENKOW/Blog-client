@@ -29,6 +29,7 @@ import FontsButton from "./buttons/FontsButton";
 import Link from "@tiptap/extension-link";
 import SizeButton from "./buttons/SizeButton";
 import LinkIcon from "@mui/icons-material/Link";
+import { CustomLink } from "./extensions/CustomLink";
 
 const Tiptap = ({ error, value, onChange, setBody }) => {
     const theme = useTheme();
@@ -40,7 +41,7 @@ const Tiptap = ({ error, value, onChange, setBody }) => {
             Video,
             TextStyle,
             Underline,
-            Link.configure({
+            CustomLink.configure({
                 openOnClick: false, // чтобы не открывалось сразу при клике
                 autolink: true, // автоматом превращает http://... в ссылки
                 protocols: ["http", "https", "mailto"],
@@ -303,7 +304,7 @@ const Tiptap = ({ error, value, onChange, setBody }) => {
                         minWidth: "100%",
                         width: "100%",
                     }}
-                    onChange={(editor) => console.log(editor)}
+                    // onChange={(editor) => console.log(editor)}
                     editor={editor}
                 />
             </Box>

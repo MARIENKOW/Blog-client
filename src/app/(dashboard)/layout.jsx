@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import Loading from "../../components/loading/Loading";
 import { Box } from "@mui/system";
 import ImgBG from "../../components/ImgBG";
+import { Footer } from "../../components/Footer";
 
 export const dynamic = "force-dynamic";
 
@@ -23,8 +24,9 @@ export default function RootLayout({ children }) {
                     position={"relative"}
                     zIndex={"10 "}
                 >
-                    <Suspense fallback={<Loading />}>{children}</Suspense>
+                    {children}
                 </Box>
+                <Footer />
             </Box>
         </>
     );

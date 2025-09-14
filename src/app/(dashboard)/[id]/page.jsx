@@ -25,25 +25,32 @@ export default async function Page({ params }) {
         return (
             <Box>
                 <Box pt={2} pb={10} overflow={"hidden"} position={"relative"}>
-                    <ContainerComponent>
-                        <BreadcrumbsComponent
-                            sx={{
-                                position: "relative",
-                                zIndex: "10",
-                                display: "inline-block",
-                                ol: {
-                                    borderRadius: 2,
-                                    display: "inline-flex",
-                                    backgroundColor: "#fff",
-                                    padding: "5px 15px",
-                                },
-                            }}
-                            main={false}
-                            options={[
-                                { name: "Новости", link: MAIN_ROUTE },
-                                { name: data?.title },
-                            ]}
-                        />
+                    <ContainerComponent
+                        sx={{ pr: { xs: 0, md: 2 }, pl: { xs: 0, md: 2 } }}
+                    >
+                        <Box
+                            sx={{ pr: { xs: 2, md: 0 }, pl: { xs: 2, md: 0 } }}
+                        >
+                            <BreadcrumbsComponent
+                                sx={{
+                                    position: "relative",
+                                    zIndex: "10",
+                                    display: "inline-block",
+                                    // width:'100%',
+                                    ol: {
+                                        borderRadius: 2,
+                                        display: "inline-flex",
+                                        backgroundColor: "#fff",
+                                        padding: "5px 15px",
+                                    },
+                                }}
+                                main={false}
+                                options={[
+                                    { name: "Новости", link: MAIN_ROUTE },
+                                    { name: data?.title },
+                                ]}
+                            />
+                        </Box>
                         <Box mb={5} mt={5}>
                             <BlogFullItem Blog={data} />
                         </Box>

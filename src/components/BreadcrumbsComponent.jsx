@@ -20,7 +20,7 @@ export default function BreadcrumbsComponent({
             maxItems={3}
             separator={<NavigateNextIcon color="secondary" fontSize="small" />}
             aria-label="breadcrumb"
-            sx={sx}
+            sx={{ ...sx, "& ol": { flexWrap: "nowrap !important" } }}
         >
             {main && (
                 <Link href={ADMIN_ROUTE}>
@@ -40,6 +40,18 @@ export default function BreadcrumbsComponent({
                     </Link>
                 ) : (
                     <Typography
+                        sx={{
+                            overflow: "hidden",
+                            "text-overflow": "ellipsis",
+                            display: " -moz-box",
+                            "-moz-box-orient": "vertical",
+                            display: "-webkit-box",
+                            "-webkit-line-clamp": "1",
+                            "-webkit-box-orient": "vertical",
+                            "line-clamp": "1",
+                            "box-orient": "vertical",
+                            position: "relative",
+                        }}
                         key={new Date()}
                         color={theme.palette.secondary.light}
                     >
