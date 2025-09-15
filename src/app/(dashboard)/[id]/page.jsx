@@ -24,7 +24,7 @@ export default async function Page({ params }) {
 
         return (
             <Box backgroundColor={'#fff'} >
-                <Box pt={20} pb={0} overflow={"hidden"} position={"relative"}>
+                <Box pt={{xs:15,md:20}} pb={0} overflow={"hidden"} position={"relative"}>
                     <ContainerComponent
                         sx={{ pr: { xs: 0, md: 2 }, pl: { xs: 0, md: 2 } }}
                     >
