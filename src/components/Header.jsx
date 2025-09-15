@@ -8,9 +8,9 @@ import Image from "next/image";
 import PhoneForwardedIcon from "@mui/icons-material/PhoneForwarded";
 import Link from "next/link";
 import { MAIN_ROUTE } from "../configs/routerLinks";
-import { useState } from "react";
+import { Children, useState } from "react";
 
-const Header = () => {
+const Header = ({ data }) => {
     const theme = useTheme();
 
     const [anchorEl, setAnchorEl] = useState(null);
@@ -54,46 +54,47 @@ const Header = () => {
                             <Image width={60} height={60} src={"/logo.png"} />
                         </Box>
                     </Link>
-                    <Button
-                        aria-label="more"
-                        id="long-button"
-                        aria-controls={menu ? "long-menu" : undefined}
-                        aria-expanded={menu ? "true" : undefined}
-                        aria-haspopup="true"
-                        onClick={handleClick}
-                        startIcon={<PhoneForwardedIcon />}
-                        variant="outlined"
-                        color="secondary"
-                        // onClick={logOut}
-                    >
-                        центр связи
-                    </Button>
-                    <Menu
-                        id="long-menu"
-                        MenuListProps={{
-                            "aria-labelledby": "long-button",
-                        }}
-                        open={menu}
-                        onClose={handleClose}
-                        anchorEl={anchorEl}
-                        sx={{ paddingBottom: 0 }}
-                    >
-                        <Link href={'tel:+9282342982449'}>
-                            <MenuItem onClick={handleClose}>
-                                +9282342982449
-                            </MenuItem>
-                        </Link>
-                        <Link href={'tel:+9282342982449'}>
-                            <MenuItem onClick={handleClose}>
-                                +9282342982449
-                            </MenuItem>
-                        </Link>
-                        <Link href={'tel:+9282342982449'}>
-                            <MenuItem onClick={handleClose}>
-                                +9282342982449
-                            </MenuItem>
-                        </Link>
-                    </Menu>
+                    {data && data?.length !== 0 ? (
+                        <>
+                            <Button
+                                aria-label="more"
+                                id="long-button"
+                                aria-controls={menu ? "long-menu" : undefined}
+                                aria-expanded={menu ? "true" : undefined}
+                                aria-haspopup="true"
+                                onClick={handleClick}
+                                startIcon={<PhoneForwardedIcon />}
+                                variant="outlined"
+                                color="secondary"
+                                // onClick={logOut}
+                            >
+                                центр связи
+                            </Button>
+                            <Menu
+                                id="long-menu"
+                                MenuListProps={{
+                                    "aria-labelledby": "long-button",
+                                }}
+                                open={menu}
+                                onClose={handleClose}
+                                anchorEl={anchorEl}
+                                sx={{ paddingBottom: 0 }}
+                            >
+                                {data?.map((e, i) => (
+                                    <Link
+                                        key={i + new Date()}
+                                        href={"tel:+9282342982449"}
+                                    >
+                                        <MenuItem onClick={handleClose}>
+                                            {e.number}
+                                        </MenuItem>
+                                    </Link>
+                                ))}
+                            </Menu>
+                        </>
+                    ) : (
+                        ""
+                    )}
                 </Toolbar>
             </ContainerComponent>
         </Box>

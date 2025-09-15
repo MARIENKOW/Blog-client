@@ -4,6 +4,8 @@ import { Box } from "@mui/system";
 import ImgBG from "../../components/ImgBG";
 import { Footer } from "../../components/Footer";
 import Header from "../../components/Header";
+import Phones from "../../components/Phones";
+import { HeaderWrapper } from "../../components/HeaderWrapper";
 
 export const dynamic = "force-dynamic";
 
@@ -18,7 +20,8 @@ export default function RootLayout({ children }) {
                 overflow={"hidden"}
             >
                 <ImgBG/>
-                <Header />
+                <HeaderWrapper/>
+                {/* <Header data={[{number:+99288294440},{number:+99288294440},{number:+99288294440}]} /> */}
                 <Box
                     display={"flex"}
                     flexDirection={"column"}
