@@ -13,6 +13,10 @@ export const PHONE_PATTERN = /^[0-9]+$/;
 export const NAME_MAX_LENGTH = 30;
 export const NAME_MIN_LENGTH = 2;
 
+export const PHONE_NUMBER_MAX_LENGTH = 15;
+export const PHONE_NUMBER_MIN_LENGTH = 7;
+export const PHONE_NUMBER_PATTERN = /^\+?\d+$/;
+
 export const POST_TITLE_MAX_LENGTH = 255;
 export const POST_TITLE_MIN_LENGTH = 5;
 

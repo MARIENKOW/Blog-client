@@ -6,9 +6,9 @@ export const Empty = () => {
    return (
       <InCenter>
          <Box display={'flex'} flexDirection={'column'} alignItems={'center'} gap={2} >
-            <SickIcon sx={{ width: 50, height: 50 }} color="secondary" />
+            <SickIcon sx={{ width: 50, height: 50 }} color="primary" />
             <Typography
-               color={"secondary"}
+               color={"primary"}
                variant="h5"
                fontWeight={600}
                textAlign={"center"}

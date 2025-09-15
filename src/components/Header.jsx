@@ -50,8 +50,18 @@ const Header = ({ data }) => {
                             pt={2}
                             pb={2}
                         >
-                            <Image width={40} height={50} src={"/logo1.png"} />
-                            <Image width={60} height={60} src={"/logo.png"} />
+                            <Image
+                                alt="logo1"
+                                width={40}
+                                height={50}
+                                src={"/logo1.png"}
+                            />
+                            <Image
+                                alt="logo1"
+                                width={60}
+                                height={60}
+                                src={"/logo.png"}
+                            />
                         </Box>
                     </Link>
                     {data && data?.length !== 0 ? (
@@ -83,7 +93,7 @@ const Header = ({ data }) => {
                                 {data?.map((e, i) => (
                                     <Link
                                         key={i + new Date()}
-                                        href={"tel:+9282342982449"}
+                                        href={"tel:" + e.number}
                                     >
                                         <MenuItem onClick={handleClose}>
                                             {e.number}

@@ -114,14 +114,14 @@ const BlogForm = ({ data = {}, onSubmit, btn = "Опубликовать" }) => 
                         <StyledTextField
                             errors={errors}
                             register={register("title", {
-                                required: "обов'язкове поле",
+                                required: "обовязательное поле",
                                 maxLength: {
                                     value: POST_TITLE_MAX_LENGTH,
-                                    message: `максимум ${POST_TITLE_MAX_LENGTH} символів`,
+                                    message: `максимум ${POST_TITLE_MAX_LENGTH} символов`,
                                 },
                                 minLength: {
                                     value: POST_TITLE_MIN_LENGTH,
-                                    message: `мінімум ${POST_TITLE_MIN_LENGTH} символів`,
+                                    message: `минимум ${POST_TITLE_MIN_LENGTH} символов`,
                                 },
                             })}
                             options={{ fullWidth: true }}

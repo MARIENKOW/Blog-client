@@ -14,14 +14,14 @@ const ErrorElement = ({ message, admin, buttons = true }) => {
          }}
          gap={2}
       >
-         <Typography color={"secondary.main"} variant={"h1"}>
+         <Typography color={"primary.dark"} variant={"h1"}>
             Упс!
          </Typography>
-         <Typography color={"secondary.main"} variant={"h4"}>
+         <Typography color={"primary.dark"} variant={"h4"}>
             Что-то пошло не так
          </Typography>
          {(message?.message || message) && (
-            <Typography variant={"body1"} color="secondary.light">
+            <Typography variant={"body1"} color="primary.light">
                {message?.message || message || ""}
             </Typography>
          )}

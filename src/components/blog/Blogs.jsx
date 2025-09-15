@@ -162,7 +162,7 @@ export default function Blogs() {
                 <CircularProgress />
             </Backdrop>
             <Pagination
-                color={'primary'}
+                color={"primary"}
                 pageCount={paginationInfo.countPages}
                 currentPage={paginationInfo.currentPage}
                 getData={async (page) => {
