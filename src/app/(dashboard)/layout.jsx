@@ -1,10 +1,6 @@
-import { Suspense } from "react";
-import Loading from "../../components/loading/Loading";
 import { Box } from "@mui/system";
 import ImgBG from "../../components/ImgBG";
 import { Footer } from "../../components/Footer";
-import Header from "../../components/Header";
-import Phones from "../../components/Phones";
 import { HeaderWrapper } from "../../components/HeaderWrapper";
 
 export const dynamic = "force-dynamic";
