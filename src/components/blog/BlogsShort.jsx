@@ -1,6 +1,6 @@
 "use client";
 
-import { Box, IconButton, Typography } from "@mui/material";
+import { Box, IconButton, Typography, useTheme } from "@mui/material";
 import { Swiper, SwiperSlide, useSwiper } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -18,6 +18,7 @@ import { grey } from "@mui/material/colors";
 const blog = new BlogService();
 
 export const BlogsShort = () => {
+    const theme = useTheme()
     const [blogs, setBlogs] = useState([]);
     useEffect(() => {
         const getData = async () => {
@@ -51,7 +52,7 @@ export const BlogsShort = () => {
     if (!blogs || blogs?.length === 0) return "";
 
     return (
-        <Box sx={{bgcolor:grey[100]}} >
+        <Box sx={{bgcolor:theme.palette.primary.dark}} >
             <ContainerComponent>
                 <Box p={"0 25px"} position={"relative"}>
                     <Swiper
@@ -113,7 +114,7 @@ export const BlogsShort = () => {
                             transform: "translate(-50%,-50%)",
                             zIndex: 2,
                         }}
-                        color="primary"
+                        color="secondary"
                         onClick={handlePrev}
                     >
                         <ArrowBackIosNewIcon fontSize="large" />
@@ -127,7 +128,7 @@ export const BlogsShort = () => {
                             transform: "translate(50%,-50%)",
                             zIndex: 2,
                         }}
-                        color="primary"
+                        color="secondary"
                         onClick={handleNext}
                     >
                         <ArrowForwardIosIcon fontSize="large" />

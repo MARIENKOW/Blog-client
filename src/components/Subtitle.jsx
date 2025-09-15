@@ -11,7 +11,7 @@ export const Subtitile = ({ text }) => {
             textAlign={"right"}
             fontSize={"32"}
             fontWeight={"700"}
-            sx={{ color: grey[600] }}
+            color="secondary.main"
         >
             {text}
         </Typography>

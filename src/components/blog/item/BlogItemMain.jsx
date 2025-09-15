@@ -1,9 +1,11 @@
+'use client'
+
 import style from "./BlogItem.module.scss";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import { Grid2 as Grid, Button, Box } from "@mui/material";
+import { Grid2 as Grid, Button, Box, useTheme } from "@mui/material";
 import Link from "next/link";
 import { BLOG_ROUTE } from "../../../configs/routerLinks";
 import DatePharse from "../../../components/DatePharse";
@@ -11,11 +13,12 @@ import { grey } from "@mui/material/colors";
 import { Subtitile } from "../../../components/Subtitle";
 
 export const BlogItemMain = ({ Blog }) => {
+    const theme = useTheme()
     if (!Blog) return "";
     return (
         <Box>
             <Box pr={2}>
-                <Subtitile text={"Главная новость"} />
+                <Subtitile text={"ВНИМАТЕЛЬНО - мошенники активизировались"} />
             </Box>
 
             <Card
@@ -24,7 +27,7 @@ export const BlogItemMain = ({ Blog }) => {
                     display: "flex",
                     flexDirection: "column",
                     p: 0,
-                    bgcolor: grey[100],
+                    // bgcolor: theme.palette.primary.contrastText,
                     boxShadow: "none",
                     // border: "1px solid #bebebe",
                     // borderRadius: 5,

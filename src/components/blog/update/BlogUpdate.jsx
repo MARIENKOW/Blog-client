@@ -80,7 +80,17 @@ export default function BlogUpdate() {
                 gap={2}
                 flexWrap={"wrap"}
             >
-                <BreadcrumbsComponent options={[{ name: "Редактировать" }]} />
+                <BreadcrumbsComponent
+                    sx={{
+                        ol: {
+                            borderRadius: 2,
+                            display: "inline-flex",
+                            backgroundColor: "#00427c",
+                            padding: "5px 15px",
+                        },
+                    }}
+                    options={[{ name: "Редактировать" }]}
+                />
                 <Link target="_blank" href={BLOG_ROUTE + "/" + data?.id}>
                     <Button fullWidth variant="contained">
                         просмотреть

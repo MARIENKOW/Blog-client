@@ -23,8 +23,8 @@ export default async function Page({ params }) {
             );
 
         return (
-            <Box>
-                <Box pt={2} pb={10} overflow={"hidden"} position={"relative"}>
+            <Box backgroundColor={'#fff'} >
+                <Box pt={20} pb={0} overflow={"hidden"} position={"relative"}>
                     <ContainerComponent
                         sx={{ pr: { xs: 0, md: 2 }, pl: { xs: 0, md: 2 } }}
                     >
@@ -40,7 +40,7 @@ export default async function Page({ params }) {
                                     ol: {
                                         borderRadius: 2,
                                         display: "inline-flex",
-                                        backgroundColor: "#fff",
+                                        backgroundColor: "#00427c",
                                         padding: "5px 15px",
                                     },
                                 }}

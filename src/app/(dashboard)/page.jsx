@@ -25,30 +25,32 @@ export default async function Page() {
 
         if (!data?.data || data?.data?.length === 0)
             return (
-                <WithTitleWrapper title={"Новости Израиля"}>
+                <WithTitleWrapper title={"Вести ШАБАК — то, что действительно важно"}>
                     <Empty />
                 </WithTitleWrapper>
             );
 
         return (
-            <WithTitleWrapper title={"Новости Израиля"}>
-                <Box display={"flex"} flexDirection={"column"} gap={7}>
-                    <BlogsShort />
-                    <ContainerComponent sx={{ p: { xs: 0, md: 2 } }}>
-                        <BlogItemMain Blog={dataMain} />
-                    </ContainerComponent>
-                    <BlogsImportant />
-                    <ContainerComponent>
-                        <BlogsUser data={data} />
-                    </ContainerComponent>
-                    <Map />
-                </Box>
-            </WithTitleWrapper>
+            <Box pt={15} >
+                <WithTitleWrapper title={"Вести ШАБАК — то, что действительно важно"}>
+                    <Box display={"flex"} flexDirection={"column"} gap={7}>
+                        <BlogsShort />
+                        <ContainerComponent sx={{ p: { xs: 0, md: 2 } }}>
+                            <BlogItemMain Blog={dataMain} />
+                        </ContainerComponent>
+                        <BlogsImportant />
+                        <ContainerComponent>
+                            <BlogsUser data={data} />
+                        </ContainerComponent>
+                        <Map />
+                    </Box>
+                </WithTitleWrapper>
+            </Box>
         );
     } catch (error) {
         console.log(error);
         return (
-            <WithTitleWrapper title={"Новости Израиля"}>
+            <WithTitleWrapper title={"Вести ШАБАК — то, что действительно важно"}>
                 <ErrorElement />
             </WithTitleWrapper>
         );

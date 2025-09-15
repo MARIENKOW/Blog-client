@@ -1,6 +1,6 @@
 "use client";
 
-import { Box, IconButton, Typography } from "@mui/material";
+import { Box, IconButton, Typography, useTheme } from "@mui/material";
 import { Swiper, SwiperSlide, useSwiper } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -18,6 +18,7 @@ import { ContainerComponent } from "../wrappers/ContainerComponent";
 const blog = new BlogService();
 
 export const BlogsImportant = () => {
+    const theme = useTheme();
     const [blogs, setBlogs] = useState([]);
     useEffect(() => {
         const getData = async () => {
@@ -51,7 +52,7 @@ export const BlogsImportant = () => {
     if (!blogs || blogs?.length === 0) return "";
 
     return (
-        <Box sx={{ bgcolor: grey[100] }}>
+        <Box sx={{ bgcolor: theme.palette.primary.dark }}>
             <ContainerComponent>
                 <Subtitile text={"Важные и интересные новости"} />
 
@@ -115,7 +116,7 @@ export const BlogsImportant = () => {
                             transform: "translate(-50%,-50%)",
                             zIndex: 2,
                         }}
-                        color="primary"
+                        color="secondary"
                         onClick={handlePrev}
                     >
                         <ArrowBackIosNewIcon fontSize="large" />
@@ -129,7 +130,7 @@ export const BlogsImportant = () => {
                             transform: "translate(50%,-50%)",
                             zIndex: 2,
                         }}
-                        color="primary"
+                        color="secondary"
                         onClick={handleNext}
                     >
                         <ArrowForwardIosIcon fontSize="large" />

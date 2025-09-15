@@ -1,15 +1,18 @@
+'use client'
+
 import style from "./BlogItem.module.scss";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import { Box, Grid2 as Grid } from "@mui/material";
+import { Box, Grid2 as Grid, useTheme } from "@mui/material";
 import Link from "next/link";
 import { BLOG_ROUTE } from "../../../configs/routerLinks";
 import { grey } from "@mui/material/colors";
 import DatePharse from "../../../components/DatePharse";
 
 const BlogFullItem = ({ Blog }) => {
+    const theme = useTheme();
     if (!Blog) return "sdfsdf";
     return (
         <>

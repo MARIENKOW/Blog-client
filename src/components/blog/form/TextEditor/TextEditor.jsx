@@ -106,7 +106,7 @@ const Tiptap = ({ error, value, onChange, setBody }) => {
                     border: "1px solid ",
                     borderColor: !!error
                         ? red[900]
-                        : theme.palette.secondary.main,
+                        : theme.palette.grey[700],
                     borderRadius: 4,
                 }}
             >
@@ -127,7 +127,7 @@ const Tiptap = ({ error, value, onChange, setBody }) => {
                     <VideoButton editor={editor} />
                     <IconButton
                         color={
-                            editor?.isActive("bold") ? "primary" : "secondary"
+                            editor?.isActive("bold") ? "primary" : "default"
                         }
                         onClick={() =>
                             editor.chain().focus().toggleBold().run()
@@ -137,7 +137,7 @@ const Tiptap = ({ error, value, onChange, setBody }) => {
                     </IconButton>
                     <IconButton
                         color={
-                            editor?.isActive("italic") ? "primary" : "secondary"
+                            editor?.isActive("italic") ? "primary" : "default"
                         }
                         onClick={() =>
                             editor.chain().focus().toggleItalic().run()
@@ -147,7 +147,7 @@ const Tiptap = ({ error, value, onChange, setBody }) => {
                     </IconButton>
                     <IconButton
                         color={
-                            editor?.isActive("strike") ? "primary" : "secondary"
+                            editor?.isActive("strike") ? "primary" : "default"
                         }
                         onClick={() =>
                             editor.chain().focus().toggleStrike().run()
@@ -159,7 +159,7 @@ const Tiptap = ({ error, value, onChange, setBody }) => {
                         color={
                             editor?.isActive("underline")
                                 ? "primary"
-                                : "secondary"
+                                : "default"
                         }
                         onClick={() =>
                             editor.chain().focus().toggleUnderline().run()
@@ -168,7 +168,7 @@ const Tiptap = ({ error, value, onChange, setBody }) => {
                         <FormatUnderlinedIcon />
                     </IconButton>
                     <IconButton
-                        color={"secondary"}
+                        color={'default'}
                         onClick={() =>
                             editor.chain().focus().unsetAllMarks().run()
                         }
@@ -176,7 +176,7 @@ const Tiptap = ({ error, value, onChange, setBody }) => {
                         <FormatClearIcon />
                     </IconButton>
                     <IconButton
-                        color={"secondary"}
+                        color={"default"}
                         // color={editor?.isActive("bold") ? "primary" : "secondary"}
                         onClick={() => {
                             const previousUrl =
@@ -226,7 +226,7 @@ const Tiptap = ({ error, value, onChange, setBody }) => {
                         color={
                             editor?.isActive("bulletList")
                                 ? "primary"
-                                : "secondary"
+                                : "default"
                         }
                         onClick={() =>
                             editor.chain().focus().toggleBulletList().run()
@@ -238,7 +238,7 @@ const Tiptap = ({ error, value, onChange, setBody }) => {
                         color={
                             editor?.isActive("orderedList")
                                 ? "primary"
-                                : "secondary"
+                                : "default"
                         }
                         onClick={() =>
                             editor.chain().focus().toggleOrderedList().run()
@@ -252,7 +252,7 @@ const Tiptap = ({ error, value, onChange, setBody }) => {
                             color={
                                 editor?.isActive({ textAlign: "left" })
                                     ? "primary"
-                                    : "secondary"
+                                    : "default"
                             }
                             onClick={() =>
                                 editor
@@ -268,7 +268,7 @@ const Tiptap = ({ error, value, onChange, setBody }) => {
                             color={
                                 editor?.isActive({ textAlign: "center" })
                                     ? "primary"
-                                    : "secondary"
+                                    : "default"
                             }
                             onClick={() =>
                                 editor
@@ -284,7 +284,7 @@ const Tiptap = ({ error, value, onChange, setBody }) => {
                             color={
                                 editor?.isActive({ textAlign: "right" })
                                     ? "primary"
-                                    : "secondary"
+                                    : "default"
                             }
                             onClick={() =>
                                 editor

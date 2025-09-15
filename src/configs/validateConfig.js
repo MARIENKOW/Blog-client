@@ -16,5 +16,5 @@ export const NAME_MIN_LENGTH = 2;
 export const POST_TITLE_MAX_LENGTH = 255;
 export const POST_TITLE_MIN_LENGTH = 5;
 
-export const POST_BODY_MAX_LENGTH = 10000;
+export const POST_BODY_MAX_LENGTH = 15000;
 export const POST_BODY_MIN_LENGTH = 300;

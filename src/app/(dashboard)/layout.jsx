@@ -3,6 +3,7 @@ import Loading from "../../components/loading/Loading";
 import { Box } from "@mui/system";
 import ImgBG from "../../components/ImgBG";
 import { Footer } from "../../components/Footer";
+import Header from "../../components/Header";
 
 export const dynamic = "force-dynamic";
 
@@ -16,7 +17,8 @@ export default function RootLayout({ children }) {
                 flexDirection={"column"}
                 overflow={"hidden"}
             >
-                {/* <ImgBG /> */}
+                <ImgBG/>
+                <Header />
                 <Box
                     display={"flex"}
                     flexDirection={"column"}

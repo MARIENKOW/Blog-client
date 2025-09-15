@@ -18,7 +18,7 @@ export const BlogItemShort = ({ item }) => {
                         fontWeight={"400"}
                         gutterBottom
                         fontSize={13}
-                        sx={{ color: grey[600] }}
+                        color="secondary.dark"
                         variant="body1"
                         component="div"
                     >
@@ -37,6 +37,7 @@ export const BlogItemShort = ({ item }) => {
                         className={style.textShort}
                         fontWeight={"500"}
                         gutterBottom
+                        color="secondary.main"
                         variant="body1"
                         component="div"
                     >

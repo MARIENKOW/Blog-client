@@ -7,7 +7,7 @@ import { grey } from "@mui/material/colors";
 export const Footer = () => {
     const theme = useTheme();
     return (
-        <Box position={"relative"} sx={{borderTopWidth:2,borderStyle:'solid'}} borderColor={grey[300]}>
+        <Box bgcolor={theme.palette.primary.dark} position={"relative"} sx={{borderTopWidth:2,borderStyle:'solid'}} borderColor={grey[300]}>
             <Typography
                 textAlign={"center"}
                 p={3}

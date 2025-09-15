@@ -12,7 +12,7 @@ export default function WithTitleWrapper({ title, children }) {
                flex={1}
                display={'flex'}
                flexDirection={'column'}
-               color="secondary.main"
+               color="primary.contrastText"
                sx={{ fontSize: { xs: "34px", md: "42px" } }}
             >
                {title}

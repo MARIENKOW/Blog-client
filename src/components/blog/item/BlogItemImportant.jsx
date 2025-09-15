@@ -34,6 +34,7 @@ export const BlogItemImportant = ({ item }) => {
                         fontWeight={"500"}
                         gutterBottom
                         variant="h6"
+                        color="secondary.main"
                         component="div"
                     >
                         {item?.title}

@@ -9,34 +9,52 @@ export default function GlobalLoader({ children }) {
     const router = useRouter();
     const [loading, setLoading] = useState(false);
 
-    // Слушаем нажатие на ссылки через router.push()
     useEffect(() => {
         const handleStart = () => setLoading(true);
         const handleStop = () => setLoading(false);
 
-        // Monkey patch router.push и router.replace
+        // Monkey patch router.push
         const originalPush = router.push;
-        router.push = (...args) => {
+        router.push = async (...args) => {
+            const target = args[0];
+            if (target === pathname) {
+                // переход на ту же страницу -> игнор
+                return originalPush(...args);
+            }
             handleStart();
-            return originalPush(...args).finally(handleStop);
+            try {
+                return await originalPush(...args);
+            } finally {
+                handleStop();
+            }
         };
+
+        // Monkey patch router.replace
         const originalReplace = router.replace;
-        router.replace = (...args) => {
+        router.replace = async (...args) => {
+            const target = args[0];
+            if (target === pathname) {
+                // переход на ту же страницу -> игнор
+                return originalReplace(...args);
+            }
             handleStart();
-            return originalReplace(...args).finally(handleStop);
+            try {
+                return await originalReplace(...args);
+            } finally {
+                handleStop();
+            }
         };
 
         return () => {
             router.push = originalPush;
             router.replace = originalReplace;
         };
-    }, [router]);
+    }, [router, pathname]);
 
-    // Срабатывает при смене pathname (если кто-то нажал <Link>)
+    // Сбрасываем загрузку при успешной смене страницы
     useEffect(() => {
         setLoading(false);
     }, [pathname]);
-    console.log('loading '+loading);
 
     return (
         <>

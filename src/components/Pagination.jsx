@@ -3,7 +3,7 @@
 import { Pagination, LinearProgress, Box } from "@mui/material";
 import { useState } from "react";
 
-const StyledPagination = ({ pageCount, currentPage, getData }) => {
+const StyledPagination = ({ pageCount, currentPage, getData,color }) => {
    const [paginationIsLoader, setPaginationIsLoader] = useState(false);
 
    const handlePaginationChange = (event, page) => {
@@ -49,7 +49,7 @@ const StyledPagination = ({ pageCount, currentPage, getData }) => {
             count={pageCount}
             size="medium"
             page={+currentPage}
-            color="primary"
+            color={color || "secondary"}
          />
          {paginationIsLoader && (
             <LinearProgress

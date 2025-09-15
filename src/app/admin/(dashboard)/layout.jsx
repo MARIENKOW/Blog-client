@@ -6,21 +6,26 @@ export const adminStore = new AdminStore();
 export const AdminContext = createContext(adminStore);
 import ChechAuthAdmin from "../../../components/wrappers/ChechAuthAdmin";
 import HeaderAdmin from "../../../components/HeaderAdmin";
-
+import { Box } from "@mui/material";
 
 export default function RootLayout({ children }) {
-   useEffect(() => {
-      adminStore.aboutAdmin();
-   }, []);
+    useEffect(() => {
+        adminStore.aboutAdmin();
+    }, []);
 
-   return (
-      <AdminContext.Provider value={adminStore}>
-         <ChechAuthAdmin>
-            <>
-               <HeaderAdmin />
-               {children}
-            </>
-         </ChechAuthAdmin>
-      </AdminContext.Provider>
-   );
+    return (
+        <AdminContext.Provider value={adminStore}>
+            <ChechAuthAdmin>
+                <Box
+                    display={"flex"}
+                    flexDirection={"column"}
+                    flex={1}
+                    bgcolor={"#fff"}
+                >
+                    <HeaderAdmin />
+                    {children}
+                </Box>
+            </ChechAuthAdmin>
+        </AdminContext.Provider>
+    );
 }
