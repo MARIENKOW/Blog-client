@@ -18,7 +18,7 @@ import { grey } from "@mui/material/colors";
 const blog = new BlogService();
 
 export const BlogsShort = () => {
-    const theme = useTheme()
+    const theme = useTheme();
     const [blogs, setBlogs] = useState([]);
     useEffect(() => {
         const getData = async () => {
@@ -52,14 +52,15 @@ export const BlogsShort = () => {
     if (!blogs || blogs?.length === 0) return "";
 
     return (
-        <Box sx={{bgcolor:theme.palette.primary.dark}} >
+        <Box sx={{ bgcolor: theme.palette.primary.dark }}>
             <ContainerComponent>
                 <Box p={"0 25px"} position={"relative"}>
                     <Swiper
                         ref={sliderRef}
+                        className="swiper-centered"
                         modules={[Navigation, Pagination, A11y]}
                         spaceBetween={40}
-                        slidesPerView={4}
+                        slidesPerView={3}
                         // onReachBeginning={()=>{
                         //    setIsBeg(true)
                         // }}
@@ -79,11 +80,11 @@ export const BlogsShort = () => {
                         }}
                         breakpoints={{
                             240: {
-                                slidesPerView: 2,
+                                slidesPerView: 1,
                                 spaceBetween: 10,
                             },
                             540: {
-                                slidesPerView: 2,
+                                slidesPerView: 1,
                                 spaceBetween: 10,
                             },
                             840: {
@@ -91,7 +92,7 @@ export const BlogsShort = () => {
                                 spaceBetween: 20,
                             },
                             940: {
-                                slidesPerView: 4,
+                                slidesPerView: 3,
                                 spaceBetween: 20,
                             },
                         }}

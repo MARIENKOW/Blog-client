@@ -14,6 +14,7 @@ import Link from "next/link";
 import { BlogItemContent } from "./BlogItemContent";
 import * as React from "react";
 import { StarCheckbox } from "./StarCheckbox";
+import { ShortCheckbox } from "./ShortCheckbox";
 import {
     ADMIN_BLOG_UPDATE_ROUTE,
     BLOG_ROUTE,
@@ -23,11 +24,13 @@ import BlogService from "../../../services/BlogService";
 import { CanceledError } from "axios";
 
 const blogImportant = new BlogService();
+const blogShort = new BlogService();
 
 const BlogItem = ({ Blog, deletePost, deleteMainPost, setMainPost }) => {
     const [anchorEl, setAnchorEl] = useState(null);
     const menu = Boolean(anchorEl);
     const [checked, setChecked] = useState(!!Blog.is_important);
+    const [checkedShort, setCheckedShort] = useState(!!Blog.is_short);
 
     const handleClose = () => {
         setAnchorEl(null);
@@ -35,14 +38,29 @@ const BlogItem = ({ Blog, deletePost, deleteMainPost, setMainPost }) => {
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
-    console.log(checked);
     const changeImportant = async () => {
         try {
             await blogImportant.setImportant(Blog.id, {
                 is_important: !checked,
             });
             setChecked((v) => !v);
-            enqueueSnackbar("Статус новости изменен", {
+            enqueueSnackbar("(важные) Статус новости изменен", {
+                variant: "success",
+            });
+        } catch (error) {
+            if (error instanceof CanceledError) return;
+            enqueueSnackbar("Упс! что-то пошло не так", {
+                variant: "error",
+            });
+        }
+    };
+    const changeShort = async () => {
+        try {
+            await blogShort.setShort(Blog.id, {
+                is_short: !checkedShort,
+            });
+            setCheckedShort((v) => !v);
+            enqueueSnackbar("(короткие) Статус новости изменен", {
                 variant: "success",
             });
         } catch (error) {
@@ -74,7 +92,10 @@ const BlogItem = ({ Blog, deletePost, deleteMainPost, setMainPost }) => {
                     },
                 }}
                 avatar={
+                    <>
                     <StarCheckbox getData={changeImportant} checked={checked} />
+                    <ShortCheckbox getData={changeShort} checked={checkedShort} />
+                    </>
                 }
                 action={
                     <IconButton

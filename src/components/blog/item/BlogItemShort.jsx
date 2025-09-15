@@ -11,7 +11,7 @@ export const BlogItemShort = ({ item }) => {
     return (
         <Link href={BLOG_ROUTE + "/" + item?.id}>
             <Grid spacing={0.1} container columns={2}>
-                <Grid size={{ xs: 2, sm: 2 }}>
+                {/* <Grid size={{ xs: 2, sm: 2 }}>
                     <Typography
                         // textAlign={"right"}
                         // sx={{ maxWidth: "400px" }}
@@ -24,7 +24,7 @@ export const BlogItemShort = ({ item }) => {
                     >
                         <DatePharse date={item?.date} />
                     </Typography>
-                </Grid>
+                </Grid> */}
                 <Grid
                     size={{ xs: 2, sm: 2 }}
                     sx={{
@@ -39,6 +39,7 @@ export const BlogItemShort = ({ item }) => {
                         gutterBottom
                         color="secondary.main"
                         variant="body1"
+                        textAlign={'center'}
                         component="div"
                     >
                         {item?.title}

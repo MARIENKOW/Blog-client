@@ -81,6 +81,16 @@ export default class BlogService {
             );
             return res;
         };
+        this.setShort = async (id, value) => {
+            const res = await $api.put(
+                BLOG_API_URL + "/short/" + id,
+                value,
+                {
+                    headers: { "Content-Type": "multipart/form-data" },
+                }
+            );
+            return res;
+        };
         this.update = async (id, value) => {
             const res = await $api.put(BLOG_API_URL + "/" + id, value, {
                 headers: { "Content-Type": "multipart/form-data" },
