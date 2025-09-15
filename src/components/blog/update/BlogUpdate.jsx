@@ -89,7 +89,10 @@ export default function BlogUpdate() {
                             padding: "5px 15px",
                         },
                     }}
-                    options={[{ name: "Редактировать" }]}
+                    options={[
+                        { name: "Блог", link: ADMIN_BLOG_ROUTE },
+                        { name: "Редактировать" },
+                    ]}
                 />
                 <Link target="_blank" href={BLOG_ROUTE + "/" + data?.id}>
                     <Button fullWidth variant="contained">

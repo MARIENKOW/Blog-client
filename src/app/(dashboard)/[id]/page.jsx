@@ -11,6 +11,7 @@ const blog = new BlogService();
 
 export default async function Page({ params }) {
     const { id } = await params;
+    
     try {
         const { data } = await blog.getById(id);
 

@@ -1,29 +1,37 @@
 import { Box, Button } from "@mui/material";
 import Link from "next/link";
-import { ADMIN_BLOG_CREATE_ROUTE } from "../../../configs/routerLinks";
 import { ContainerComponent } from "../../../components/wrappers/ContainerComponent";
-import Blogs from "../../../components/blog/Blogs";
+import { ADMIN_BLOG_ROUTE } from "../../../configs/routerLinks";
+import { ADMIN_PHONE_ROUTE } from "../../../configs/routerLinks";
 
 export default function Page() {
     return (
         <ContainerComponent
-            sx={{ flex: 1, display: "flex", flexDirection: "column" }}
+            sx={{
+                flex: 1,
+                display: "flex",
+                alingItems: "center",
+                justifyContent: "center",
+                flexDirection: "row",
+            }}
         >
-            <Box flex={1} gap={2} display={"flex"} flexDirection={"column"}>
-                <Box
-                    display={"flex"}
-                    justifyContent={"end"}
-                    flexDirection={{ xs: "column", sm: "row" }}
-                    gap={2}
-                    flexWrap={"wrap"}
-                >
-                    <Link href={ADMIN_BLOG_CREATE_ROUTE}>
-                        <Button fullWidth variant="contained">
-                            Добавить
-                        </Button>
-                    </Link>
-                </Box>
-                <Blogs />
+            <Box
+                flex={"0 1 400px"}
+                display={"flex"}
+                gap={4}
+                justifyContent={'center'}
+                flexDirection={"column"}
+            >
+                <Link href={ADMIN_BLOG_ROUTE}>
+                    <Button fullWidth variant="contained" color="primary">
+                        Новости
+                    </Button>
+                </Link>
+                <Link href={ADMIN_PHONE_ROUTE}>
+                    <Button fullWidth variant="contained" color="primary">
+                        контакты
+                    </Button>
+                </Link>
             </Box>
         </ContainerComponent>
     );

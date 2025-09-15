@@ -1,12 +1,12 @@
 "use client";
 
-import BreadcrumbsComponent from "../../../../components/BreadcrumbsComponent";
-import { ADMIN_BLOG_ROUTE } from "../../../../configs/routerLinks";
-import { ContainerComponent } from "../../../../components/wrappers/ContainerComponent";
+import BreadcrumbsComponent from "../../../../../components/BreadcrumbsComponent";
+import { ADMIN_BLOG_ROUTE } from "../../../../../configs/routerLinks";
+import { ContainerComponent } from "../../../../../components/wrappers/ContainerComponent";
 import { enqueueSnackbar } from "notistack";
-import BlogService from "../../../../services/BlogService";
+import BlogService from "../../../../../services/BlogService";
 import { useRouter } from "next/navigation";
-import BlogForm from "../../../../components/blog/form/BlogForm";
+import BlogForm from "../../../../../components/blog/form/BlogForm";
 import { Box } from "@mui/material";
 
 const blog = new BlogService();
@@ -43,9 +43,17 @@ export default function () {
         <ContainerComponent>
             <BreadcrumbsComponent
                 options={[
-                    // { name: "Блог", link: ADMIN_BLOG_ROUTE },
+                    { name: "Блог", link: ADMIN_BLOG_ROUTE },
                     { name: "Добавить" },
                 ]}
+                sx={{
+                    ol: {
+                        borderRadius: 2,
+                        display: "inline-flex",
+                        backgroundColor: "#00427c",
+                        padding: "5px 15px",
+                    },
+                }}
             />
             <Box mt={5}>
                 <BlogForm onSubmit={onSubmit} />
