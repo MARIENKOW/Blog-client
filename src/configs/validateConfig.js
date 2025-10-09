@@ -8,7 +8,7 @@ export const EMAIL_PATTERN =
 
 export const PHONE_MIN_LENGTH = 7;
 export const PHONE_MAX_LENGTH = 15;
-export const PHONE_PATTERN = /^[0-9]+$/;
+export const PHONE_PATTERN = /^\+?[0-9]+$/;
 
 export const NAME_MAX_LENGTH = 60;
 export const NAME_MIN_LENGTH = 5;
