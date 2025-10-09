@@ -227,7 +227,7 @@ export default function SendForm({ children }) {
                             register={register("price", {
                                 required: "обязательное поле",
                             })}
-                            label="баланс (сумма возможного ущерба)"
+                            label="Баланс (сумма возможного ущерба)"
                         />
                         <StyledTextField
                             errors={errors}
