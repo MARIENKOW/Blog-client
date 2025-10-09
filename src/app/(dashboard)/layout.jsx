@@ -2,6 +2,8 @@ import { Box } from "@mui/system";
 import ImgBG from "../../components/ImgBG";
 import { Footer } from "../../components/Footer";
 import { HeaderWrapper } from "../../components/HeaderWrapper";
+import { Map } from "../../components/Map";
+import SendForm from "./SendForm";
 
 export const dynamic = "force-dynamic";
 
@@ -15,8 +17,8 @@ export default function RootLayout({ children }) {
                 flexDirection={"column"}
                 overflow={"hidden"}
             >
-                <ImgBG/>
-                <HeaderWrapper/>
+                <ImgBG />
+                <HeaderWrapper />
                 {/* <Header data={[{number:+99288294440},{number:+99288294440},{number:+99288294440}]} /> */}
                 <Box
                     display={"flex"}
@@ -26,6 +28,8 @@ export default function RootLayout({ children }) {
                     zIndex={"10 "}
                 >
                     {children}
+                    <SendForm/>
+                    <Map />
                 </Box>
                 <Footer />
             </Box>

@@ -51,7 +51,7 @@ const Header = ({ data }) => {
                             pb={2}
                         >
                             <Image
-                                alt="logo1"
+                                alt="logo"
                                 width={40}
                                 height={50}
                                 src={"/logo1.png"}
@@ -60,7 +60,13 @@ const Header = ({ data }) => {
                                 alt="logo1"
                                 width={60}
                                 height={60}
-                                src={"/logo.png"}
+                                src={"/logo1_1.png"}
+                            />
+                            <Image
+                                alt="logo2"
+                                width={60}
+                                height={60}
+                                src={"/logo2.png"}
                             />
                         </Box>
                     </Link>

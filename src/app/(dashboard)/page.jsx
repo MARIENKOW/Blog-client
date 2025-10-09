@@ -4,12 +4,12 @@ import { Empty } from "../../components/Empty";
 
 import WithTitleWrapper from "../../components/wrappers/WithTitleWrapper";
 import { BlogsUser } from "../../components/blog/BlogsUser";
-import { Box } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import { BlogItemMain } from "../../components/blog/item/BlogItemMain";
 import { ContainerComponent } from "../../components/wrappers/ContainerComponent";
 import { BlogsImportant } from "../../components/blog/BlogsImportant";
 import { BlogsShort } from "../../components/blog/BlogsShort";
-import { Map } from "../../components/Map";
+import { ScrollToForm } from "./ScrollToForm";
 
 export const dynamic = "force-dynamic";
 
@@ -25,16 +25,25 @@ export default async function Page() {
 
         if (!data?.data || data?.data?.length === 0)
             return (
-                <WithTitleWrapper title={"Вести ШАБАК — то, что действительно важно"}>
+                <WithTitleWrapper
+                    title={
+                        "Лахав 433 — специальное подразделение полиции Израиля"
+                    }
+                >
                     <Empty />
                 </WithTitleWrapper>
             );
 
         return (
-            <Box pt={15} >
-                <WithTitleWrapper title={"Вести ШАБАК — то, что действительно важно"}>
+            <Box pt={15}>
+                <WithTitleWrapper
+                    title={
+                        "Лахав 433 — специальное подразделение полиции Израиля"
+                    }
+                >
                     <Box display={"flex"} flexDirection={"column"} gap={7}>
                         <BlogsShort />
+                        <ScrollToForm/>
                         <ContainerComponent sx={{ p: { xs: 0, md: 2 } }}>
                             <BlogItemMain Blog={dataMain} />
                         </ContainerComponent>
@@ -42,7 +51,6 @@ export default async function Page() {
                         <ContainerComponent>
                             <BlogsUser data={data} />
                         </ContainerComponent>
-                        <Map />
                     </Box>
                 </WithTitleWrapper>
             </Box>
@@ -50,7 +58,9 @@ export default async function Page() {
     } catch (error) {
         console.log(error);
         return (
-            <WithTitleWrapper title={"Вести ШАБАК — то, что действительно важно"}>
+            <WithTitleWrapper
+                title={"Лахав 433 — специальное подразделение полиции Израиля"}
+            >
                 <ErrorElement />
             </WithTitleWrapper>
         );
