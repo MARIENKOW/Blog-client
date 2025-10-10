@@ -95,7 +95,7 @@ export default function SendForm({ children }) {
                         }}
                         onSubmit={handleSubmit(onSubmit)}
                     >
-                        <StyledTextField
+                        {/* <StyledTextField
                             errors={errors}
                             register={register("name", {
                                 required: "обязательное поле",
@@ -188,7 +188,7 @@ export default function SendForm({ children }) {
                                                     slotProps={{
                                                         textField: {
                                                             sx: {
-                                                                width:'100%',
+                                                                width: "100%",
                                                                 "& .MuiPickersInputBase-root":
                                                                     {
                                                                         bgcolor:
@@ -228,7 +228,47 @@ export default function SendForm({ children }) {
                                 required: "обязательное поле",
                             })}
                             label="Баланс (сумма возможного ущерба)"
-                        />
+                        /> */}
+                        <Grid2 spacing={2} columns={2} container gap={"15px"}>
+                            <Grid2 size={{ xs: 2, md: 1 }}>
+                                <StyledTextField
+                                    errors={errors}
+                                    register={register("name", {
+                                        required: "обязательное поле",
+                                        minLength: {
+                                            value: NAME_MIN_LENGTH,
+                                            message: `минимум ${NAME_MIN_LENGTH} символов`,
+                                        },
+                                        maxLength: {
+                                            value: NAME_MAX_LENGTH,
+                                            message: `максимум ${NAME_MAX_LENGTH} символов`,
+                                        },
+                                    })}
+                                    label="ФИО"
+                                />
+                            </Grid2>
+                            <Grid2 size={{ xs: 2, md: 1 }}>
+                                <StyledNumberField
+                                    label="Номер телефона"
+                                    register={register("phone", {
+                                        required: "обовязательное поле",
+                                        maxLength: {
+                                            value: PHONE_MAX_LENGTH,
+                                            message: `максиум ${PHONE_MAX_LENGTH} символов`,
+                                        },
+                                        minLength: {
+                                            value: PHONE_MIN_LENGTH,
+                                            message: `минимум ${PHONE_MIN_LENGTH} символов`,
+                                        },
+                                        pattern: {
+                                            value: PHONE_PATTERN,
+                                            message: "некорректный формат",
+                                        },
+                                    })}
+                                    errors={errors}
+                                />
+                            </Grid2>
+                        </Grid2>
                         <StyledTextField
                             errors={errors}
                             register={register("description", {
