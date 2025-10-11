@@ -5,9 +5,10 @@ import {
     CircularProgress,
     Grid2,
     IconButton,
+    LinearProgress,
 } from "@mui/material";
 import VideoService from "../../../../../services/VideoService";
-import { useContext, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { enqueueSnackbar } from "notistack";
 import { VideosIdContext } from "../../BlogForm";
 import {
@@ -22,11 +23,17 @@ import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import { StyledLoadingButton } from "../../../../form/StyledLoadingButton";
-import { useQuery } from "@tanstack/react-query";
+import {
+    useQuery,
+    keepPreviousData,
+    useQueryClient,
+} from "@tanstack/react-query";
 import { CanceledError } from "axios";
 import Pagination from "../../../../Pagination";
 import { VideoControll } from "./VideoControll";
 import { grey } from "@mui/material/colors";
+import ErrorElement from "../../../../ErrorElement";
+import { Empty } from "../../../../Empty";
 
 const video = new VideoService();
 
@@ -37,17 +44,14 @@ export default function VideoButton({ editor }) {
     const [open, setOpen] = useState(false);
     const [page, setPage] = useState(1);
 
-    const { error, data, isPending, refetch } = useQuery({
+    const queryClient = useQueryClient();
+
+    const { data, isPending, refetch, isError, isFetching } = useQuery({
         queryKey: ["videos", page],
+        placeholderData: keepPreviousData,
         queryFn: async () => {
-            try {
-                const { data } = await video.getAll(page);
-                console.log(data);
-                return data;
-            } catch (error) {
-                if (error instanceof CanceledError) return;
-                throw new Error(error);
-            }
+            const { data } = await video.getAll(page);
+            return data;
         },
     });
 
@@ -59,14 +63,24 @@ export default function VideoButton({ editor }) {
         setOpen(false);
     };
 
+    useEffect(() => {
+        console.log(popupRef.current);
+        if (popupRef.current) {
+            popupRef.current?.scrollTo({ top: 0, behavior: "smooth" });
+        }
+    }, [page]);
+
     const loadVideo = async (body, event) => {
         try {
             setLoading(true);
             await video.create({ video: body });
-            await refetch();
-            if (popupRef.current) {
-                popupRef.current.scrollTop = 0; // прокрутка в самый верх
-            }
+            console.log(
+                queryClient
+                    .getQueryCache()
+                    .getAll()
+                    .map((q) => q.queryKey)
+            );
+            setPage(1);
             enqueueSnackbar("Видео загружено", { variant: "success" });
         } catch (e) {
             console.log(e);
@@ -107,7 +121,9 @@ export default function VideoButton({ editor }) {
                 >
                     {isPending ? (
                         <CircularProgress size="20px" />
-                    ) : (
+                    ) : isError ? (
+                        <ErrorElement />
+                    ) : data && data?.data?.length >= 1 ? (
                         <>
                             <Box flex={1}>
                                 <Grid2
@@ -135,6 +151,8 @@ export default function VideoButton({ editor }) {
                                 getData={setPage}
                             />
                         </>
+                    ) : (
+                        <Empty />
                     )}
                 </DialogContent>
                 <DialogActions>
@@ -148,6 +166,18 @@ export default function VideoButton({ editor }) {
                         load video
                     </StyledLoadingButton>
                 </DialogActions>
+                {isFetching && (
+                    <LinearProgress
+                        sx={{
+                            minWidth: "100%",
+                            position: "absolute",
+                            bottom: 0,
+                            left: 0,
+                            width: "100%",
+                        }}
+                        color="primary"
+                    />
+                )}
             </Dialog>
         </>
     );
