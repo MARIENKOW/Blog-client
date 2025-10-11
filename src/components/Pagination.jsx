@@ -4,9 +4,10 @@ import { Pagination, LinearProgress, Box } from "@mui/material";
 import { useState } from "react";
 
 const StyledPagination = ({ pageCount, currentPage, getData,color }) => {
-   const [paginationIsLoader, setPaginationIsLoader] = useState(false);
+   const [paginationIsLoader, setPaginationIsLoader] = useState(false); //! состояние загрузки всегда выше      нужно поменять
 
    const handlePaginationChange = (event, page) => {
+    console.log(page);
       if(page == currentPage) return
       setPaginationIsLoader(true);
       const showAllBlogs = async () => {

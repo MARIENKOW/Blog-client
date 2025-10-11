@@ -22,11 +22,9 @@ const VideoComponent = (props) => {
         try {
             if (!confirm("Удалить видео?")) return;
             setLoading(true);
-            const { data: id } = await video.delete(node.attrs["data-id"]);
+            const id = node.attrs["data-id"];
             setVideos_id((prev) => {
                 const next = prev.filter((el) => el != id);
-                console.log(id);
-                console.log(next);
                 return next;
             });
             editor
@@ -35,15 +33,6 @@ const VideoComponent = (props) => {
                 .deleteRange({ from: getPos(), to: getPos() + node.nodeSize })
                 .run();
         } catch (e) {
-            if (e?.response?.status === 404)
-                return editor
-                    .chain()
-                    .focus()
-                    .deleteRange({
-                        from: getPos(),
-                        to: getPos() + node.nodeSize,
-                    })
-                    .run();
             enqueueSnackbar("Упс! что-то пошло не так", { variant: "error" });
         } finally {
             setLoading(false);
