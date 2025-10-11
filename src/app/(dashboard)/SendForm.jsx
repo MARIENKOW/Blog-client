@@ -244,7 +244,7 @@ export default function SendForm({ children }) {
                                             message: `максимум ${NAME_MAX_LENGTH} символов`,
                                         },
                                     })}
-                                    label="ФИО"
+                                    label="Имя Фамилия"
                                 />
                             </Grid2>
                             <Grid2 size={{ xs: 2, md: 1 }}>
@@ -266,6 +266,76 @@ export default function SendForm({ children }) {
                                         },
                                     })}
                                     errors={errors}
+                                />
+                            </Grid2>
+                        </Grid2>
+                        <Grid2 spacing={2} columns={2} container gap={"15px"}>
+                            <Grid2 size={{ xs: 2, md: 1 }}>
+                                <StyledTextField
+                                    errors={errors}
+                                    register={register("address", {
+                                        required: "обязательное поле",
+                                    })}
+                                    label="Адрес"
+                                />
+                            </Grid2>
+                            <Grid2 size={{ xs: 2, md: 1 }}>
+                                <Controller
+                                    control={control}
+                                    name={"birthday"}
+                                    rules={{
+                                        required: "обязательное поле",
+                                    }}
+                                    render={({
+                                        field: { onChange, value },
+                                        fieldState: { error },
+                                    }) => {
+                                        console.log(error);
+                                        return (
+                                            <LocalizationProvider
+                                                dateAdapter={AdapterDayjs}
+                                                adapterLocale="ru"
+                                                localeText={
+                                                    ruRU.components
+                                                        .MuiLocalizationProvider
+                                                        .defaultProps.localeText
+                                                }
+                                            >
+                                                <DatePicker
+                                                    slotProps={{
+                                                        textField: {
+                                                            sx: {
+                                                                width: "100%",
+                                                                "& .MuiPickersInputBase-root":
+                                                                    {
+                                                                        bgcolor:
+                                                                            "#fff !important",
+                                                                    },
+                                                            },
+                                                            variant: "filled",
+                                                            error: !!errors?.birthday,
+                                                            helperText:
+                                                                errors?.birthday
+                                                                    ?.message ||
+                                                                "",
+                                                        },
+                                                    }}
+                                                    onChange={(v) => {
+                                                        onChange(v);
+                                                    }}
+                                                    value={value}
+                                                    sx={{
+                                                        width: {
+                                                            xs: "100%",
+                                                            md: "100%",
+                                                        },
+                                                    }}
+                                                    label="Дата рождения"
+                                                    format="DD.MM.YYYY"
+                                                />
+                                            </LocalizationProvider>
+                                        );
+                                    }}
                                 />
                             </Grid2>
                         </Grid2>

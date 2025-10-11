@@ -145,18 +145,18 @@ function DragAndDrop({
                                     sx={{
                                         flex: 1,
                                         borderColor: dragOver
-                                            ? theme.palette.secondary.main
+                                            ? theme.palette.secondary.dark
                                             : error
                                             ? theme.palette.error.main
-                                            : theme.palette.secondary.light,
+                                            : "#000",
                                         borderStyle: "dashed",
                                         borderWidth: "1px",
                                         padding: 3,
                                         cursor: "pointer",
                                         textAlign: "center",
-                                        background:
-                                            theme.palette.secondary
-                                                .contrastText,
+                                        // background:
+                                        //     theme.palette.secondary
+                                        //         .dark,
                                         position: "relative",
                                         display: "flex",
                                         justifyContent: "center",
@@ -166,7 +166,7 @@ function DragAndDrop({
                                         "&:hover": {
                                             // background: theme.palette.background.light,
                                             borderColor:
-                                                theme.palette.secondary.light,
+                                                theme.palette.secondary.dark,
                                         },
                                     }}
                                 >
@@ -186,13 +186,11 @@ function DragAndDrop({
                                                         color: dragOver
                                                             ? theme.palette
                                                                   .secondary
-                                                                  .light
+                                                                  .dark
                                                             : error
                                                             ? theme.palette
                                                                   .error.main
-                                                            : theme.palette
-                                                                  .secondary
-                                                                  .main,
+                                                            : "#000",
                                                     }}
                                                 />
                                                 <Typography
@@ -200,10 +198,10 @@ function DragAndDrop({
                                                         dragOver
                                                             ? theme.palette
                                                                   .secondary
-                                                                  .light
+                                                                  .dark
                                                             : error
                                                             ? "error"
-                                                            : "secondary"
+                                                            : "#000"
                                                     }
                                                 >
                                                     Drag and drop an image here
