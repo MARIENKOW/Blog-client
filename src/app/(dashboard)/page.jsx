@@ -10,6 +10,7 @@ import { ContainerComponent } from "../../components/wrappers/ContainerComponent
 import { BlogsImportant } from "../../components/blog/BlogsImportant";
 import { BlogsShort } from "../../components/blog/BlogsShort";
 import { ScrollToForm } from "./ScrollToForm";
+import { Persons } from "./Persons";
 
 export const dynamic = "force-dynamic";
 
@@ -43,10 +44,11 @@ export default async function Page() {
                 >
                     <Box display={"flex"} flexDirection={"column"} gap={7}>
                         <BlogsShort />
-                        <ScrollToForm/>
+                        <ScrollToForm />
                         <ContainerComponent sx={{ p: { xs: 0, md: 2 } }}>
                             <BlogItemMain Blog={dataMain} />
                         </ContainerComponent>
+                        <Persons />
                         <BlogsImportant />
                         <ContainerComponent>
                             <BlogsUser data={data} />
