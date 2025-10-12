@@ -14,7 +14,7 @@ export const Footer = () => {
                 variant="body2"
                 color="secondary.main"
             >
-                © 2001-2025 news shabak
+                © 2008-2025 Lahav 433
             </Typography>
         </Box>
     );

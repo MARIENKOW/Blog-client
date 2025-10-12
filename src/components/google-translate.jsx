@@ -6,16 +6,91 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
+import ReactCountryFlag from "react-country-flag";
 
+<ReactCountryFlag
+    countryCode="US"
+    svg
+    style={{ width: "1.5em", height: "1.5em" }}
+/>;
 // Список языков
 const LANGUAGES = [
-    { code: "ru", label: "Русский", rtl: false },
-    { code: "en", label: "English", rtl: false },
-    { code: "pl", label: "Polski", rtl: false },
-    { code: "de", label: "Deutsch", rtl: false },
-    { code: "fr", label: "Français", rtl: false },
-    { code: "iw", label: "🇮🇱עברית", rtl: true },
+    {
+        code: "ru",
+        label: (
+            <ReactCountryFlag
+                countryCode="RU"
+                svg
+                style={{ width: "1.5em", height: "1.5em" }}
+            />
+        ),
+        rtl: false,
+    },
+    {
+        code: "iw",
+        label: (
+            <ReactCountryFlag
+                countryCode="IL"
+                svg
+                style={{ width: "1.5em", height: "1.5em" }}
+            />
+        ),
+        rtl: false,
+    },
+    {
+        code: "en",
+        label: (
+            <ReactCountryFlag
+                countryCode="US"
+                svg
+                style={{ width: "1.5em", height: "1.5em" }}
+            />
+        ),
+        rtl: false,
+    },
+    {
+        code: "pl",
+        label: (
+            <ReactCountryFlag
+                countryCode="PL"
+                svg
+                style={{ width: "1.5em", height: "1.5em" }}
+            />
+        ),
+        rtl: false,
+    },
+    {
+        code: "de",
+        label: (
+            <ReactCountryFlag
+                countryCode="DE"
+                svg
+                style={{ width: "1.5em", height: "1.5em" }}
+            />
+        ),
+        rtl: false,
+    },
+    {
+        code: "fr",
+        label: (
+            <ReactCountryFlag
+                countryCode="FR"
+                svg
+                style={{ width: "1.5em", height: "1.5em" }}
+            />
+        ),
+        rtl: false,
+    },
 ];
+
+function getCurrentGoogleTranslateLang() {
+    const cookie = document.cookie.match(/googtrans=\/[^/]+\/([^;]+)/);
+    const cookieLang = cookie ? cookie[1] : null; // например "en" или "he"
+    const findObj = LANGUAGES.find((e) => e.code == cookieLang);
+    return findObj ? findObj.code : "ru";
+}
+
+const currentLang = getCurrentGoogleTranslateLang();
 
 export default function GoogleTranslate() {
     useEffect(() => {
@@ -81,6 +156,7 @@ export default function GoogleTranslate() {
                     // value={"ru"}
                     sx={{ width: "100%" }}
                     // displayEmpty
+                    defaultValue={currentLang}
                     onChange={handleChange}
                     // onClick={() => handleLanguageChange(lang.code, lang.rtl)}
                 >

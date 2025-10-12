@@ -11,6 +11,8 @@ import { MAIN_ROUTE } from "../configs/routerLinks";
 import { Children, useState } from "react";
 import GoogleTranslate from "./google-translate";
 
+
+
 const Header = ({ data }) => {
     const theme = useTheme();
 
@@ -40,41 +42,44 @@ const Header = ({ data }) => {
                         display: "flex",
                         justifyContent: "space-between",
                         alignItems: "center",
-                        gap: 3,
+                        gap: 1,
                     }}
                 >
                     <Link href={MAIN_ROUTE}>
                         <Box
                             display={"flex"}
                             alignItems={"center"}
-                            gap={2}
+                            gap={1}
                             pt={2}
                             pb={2}
                         >
                             <Image
                                 alt="logo"
-                                width={40}
-                                height={50}
+                                width={30}
+                                height={40}
                                 src={"/logo1.png"}
                             />
                             <Image
                                 alt="logo1"
-                                width={60}
-                                height={60}
+                                width={40}
+                                height={40}
                                 src={"/logo1_1.png"}
                             />
                             <Image
                                 alt="logo2"
-                                width={60}
-                                height={60}
+                                width={40}
+                                height={40}
                                 src={"/logo2.png"}
                             />
                         </Box>
                     </Link>
                     <Box
                         display={"flex"}
-                        justifyContent={"space-between"}
+                        justifyContent={"end"}
                         alignItems={"center"}
+                        flexWrap={"wrap"}
+                        pt={1}
+                        pb={1}
                         gap={1}
                     >
                         {data && data?.length !== 0 ? (
@@ -91,6 +96,7 @@ const Header = ({ data }) => {
                                     startIcon={<PhoneForwardedIcon />}
                                     variant="outlined"
                                     color="secondary"
+                                    size="small"
                                     // onClick={logOut}
                                 >
                                     центр связи
