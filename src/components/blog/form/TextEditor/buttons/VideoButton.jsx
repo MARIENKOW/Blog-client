@@ -81,6 +81,10 @@ export default function VideoButton({ editor }) {
                     .map((q) => q.queryKey)
             );
             setPage(1);
+            if (popupRef.current) {
+                popupRef.current?.scrollTo({ top: 0, behavior: "smooth" });
+            }
+            queryClient.invalidateQueries({ queryKey: ["videos", 1] });
             enqueueSnackbar("Видео загружено", { variant: "success" });
         } catch (e) {
             console.log(e);

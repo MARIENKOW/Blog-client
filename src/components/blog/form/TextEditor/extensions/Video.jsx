@@ -23,9 +23,17 @@ const VideoComponent = (props) => {
             if (!confirm("Удалить видео?")) return;
             setLoading(true);
             const id = node.attrs["data-id"];
+
             setVideos_id((prev) => {
-                const next = prev.filter((el) => el != id);
-                return next;
+                console.log(prev);
+                console.log(id);
+                const index = prev.indexOf(id); // ищем первое совпадение
+                if (index !== -1) {
+                    const newArr = [...prev]; // копируем чтобы не мутировать
+                    newArr.splice(index, 1); // удаляем элемент по индексу
+                    return newArr;
+                }
+                return prev;
             });
             editor
                 .chain()
