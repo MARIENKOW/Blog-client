@@ -126,3 +126,56 @@ body {
 //     z-index: 9999; /* вот так правильно */
 // }
 
+/* Убираем верхний баннер */
+.goog-te-banner-frame.skiptranslate {
+    display: none !important;
+}
+
+/* Чтобы не было пустого отступа сверху */
+body {
+    //   top: 0px !important;
+}
+
+/* Убираем иконку Google Translate (если мешает) */
+// .goog-te-gadget-icon {
+//     display: none !important;
+// }
+// .goog-te-gadget-icon {
+//     display: none !important;
+// }
+
+// /* Убираем белый фон при переключении */
+// .goog-te-menu-value span {
+//     color: inherit !important;
+// }
+
+// .goog-logo-link,
+// .goog-te-gadget {
+//     display: none !important;
+// }
+
+// .skiptranslate {
+//     display: none !important;
+// }
+
+.goog-te-banner-frame.skiptranslate {
+    display: none !important;
+}
+body {
+    top: 0 !important;
+}
+.goog-logo-link,
+.goog-te-gadget span {
+    display: none !important;
+}
+#goog-gt-tt.skiptranslate {
+    display: none !important;
+}
+
+/* Скрываем оригинальный select */
+#google_translate_element {
+    display: none !important;
+}
+iframe.skiptranslate {
+    display: none !important;
+}

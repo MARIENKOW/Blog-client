@@ -9,6 +9,7 @@ import PhoneForwardedIcon from "@mui/icons-material/PhoneForwarded";
 import Link from "next/link";
 import { MAIN_ROUTE } from "../configs/routerLinks";
 import { Children, useState } from "react";
+import GoogleTranslate from "./google-translate";
 
 const Header = ({ data }) => {
     const theme = useTheme();
@@ -70,47 +71,57 @@ const Header = ({ data }) => {
                             />
                         </Box>
                     </Link>
-                    {data && data?.length !== 0 ? (
-                        <>
-                            <Button
-                                aria-label="more"
-                                id="long-button"
-                                aria-controls={menu ? "long-menu" : undefined}
-                                aria-expanded={menu ? "true" : undefined}
-                                aria-haspopup="true"
-                                onClick={handleClick}
-                                startIcon={<PhoneForwardedIcon />}
-                                variant="outlined"
-                                color="secondary"
-                                // onClick={logOut}
-                            >
-                                центр связи
-                            </Button>
-                            <Menu
-                                id="long-menu"
-                                MenuListProps={{
-                                    "aria-labelledby": "long-button",
-                                }}
-                                open={menu}
-                                onClose={handleClose}
-                                anchorEl={anchorEl}
-                                sx={{ paddingBottom: 0 }}
-                            >
-                                {data?.map((e, i) => (
-                                    <Link
-                                        key={i + new Date()}
-                                        href={"tel:" + e.number}
-                                    >
-                                        <MenuItem onClick={handleClose}>
-                                            {e.number}
-                                        </MenuItem>
-                                    </Link>
-                                ))}
-                            </Menu>
-                        </>
-                    ) : (
-                        ""
-                    )}
+                    <Box
+                        display={"flex"}
+                        justifyContent={"space-between"}
+                        alignItems={"center"}
+                        gap={1}
+                    >
+                        {data && data?.length !== 0 ? (
+                            <>
+                                <Button
+                                    aria-label="more"
+                                    id="long-button"
+                                    aria-controls={
+                                        menu ? "long-menu" : undefined
+                                    }
+                                    aria-expanded={menu ? "true" : undefined}
+                                    aria-haspopup="true"
+                                    onClick={handleClick}
+                                    startIcon={<PhoneForwardedIcon />}
+                                    variant="outlined"
+                                    color="secondary"
+                                    // onClick={logOut}
+                                >
+                                    центр связи
+                                </Button>
+                                <Menu
+                                    id="long-menu"
+                                    MenuListProps={{
+                                        "aria-labelledby": "long-button",
+                                    }}
+                                    open={menu}
+                                    onClose={handleClose}
+                                    anchorEl={anchorEl}
+                                    sx={{ paddingBottom: 0 }}
+                                >
+                                    {data?.map((e, i) => (
+                                        <Link
+                                            key={i + new Date()}
+                                            href={"tel:" + e.number}
+                                        >
+                                            <MenuItem onClick={handleClose}>
+                                                {e.number}
+                                            </MenuItem>
+                                        </Link>
+                                    ))}
+                                </Menu>
+                            </>
+                        ) : (
+                            ""
+                        )}
+                        <GoogleTranslate />
+                    </Box>
                 </Toolbar>
             </ContainerComponent>
         </Box>
