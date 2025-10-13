@@ -84,13 +84,14 @@ const LANGUAGES = [
 ];
 
 function getCurrentGoogleTranslateLang() {
-    const cookie = document.cookie.match(/googtrans=\/[^/]+\/([^;]+)/);
+    if (typeof document === "undefined") return "ru";
+    const cookie = document?.cookie?.match(/googtrans=\/[^/]+\/([^;]+)/);
     const cookieLang = cookie ? cookie[1] : null; // например "en" или "he"
     const findObj = LANGUAGES.find((e) => e.code == cookieLang);
     return findObj ? findObj.code : "ru";
 }
 
-const currentLang = getCurrentGoogleTranslateLang();
+// const currentLang = getCurrentGoogleTranslateLang();
 
 export default function GoogleTranslate() {
     useEffect(() => {
@@ -156,7 +157,8 @@ export default function GoogleTranslate() {
                     // value={"ru"}
                     sx={{ width: "100%" }}
                     // displayEmpty
-                    defaultValue={currentLang}
+                    // defaultValue={currentLang}
+                    defaultValue={getCurrentGoogleTranslateLang()}
                     onChange={handleChange}
                     // onClick={() => handleLanguageChange(lang.code, lang.rtl)}
                 >
