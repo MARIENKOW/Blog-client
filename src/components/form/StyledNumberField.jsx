@@ -23,7 +23,7 @@ export const StyledNumberField = ({
             <FilledInput
                 {...register}
                 {...options}
-                // type="number"
+                type="number"
                 id={`filled-adornment-amount-${register.name}`}
                 startAdornment={
                     startAdornment && (
