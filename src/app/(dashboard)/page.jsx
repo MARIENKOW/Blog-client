@@ -27,9 +27,9 @@ export default async function Page() {
         if (!data?.data || data?.data?.length === 0)
             return (
                 <WithTitleWrapper
-                    title={
-                        "Лахав 433 — специальное подразделение полиции Израиля"
-                    }
+                    title={"LAHAV 433 לַהַב"}
+                    subtitle={"Специальное подразделения полиции Израиля"}
+                    imgSrc={"/title-logo.png"}
                 >
                     <Empty />
                 </WithTitleWrapper>
@@ -38,9 +38,9 @@ export default async function Page() {
         return (
             <Box pt={15}>
                 <WithTitleWrapper
-                    title={
-                        "Лахав 433 — специальное подразделение полиции Израиля"
-                    }
+                    title={"LAHAV 433 לַהַב"}
+                    subtitle={"Специальное подразделения полиции Израиля"}
+                    imgSrc={"/title-logo.png"}
                 >
                     <Box display={"flex"} flexDirection={"column"} gap={7}>
                         <BlogsShort />
@@ -61,7 +61,9 @@ export default async function Page() {
         console.log(error);
         return (
             <WithTitleWrapper
-                title={"Лахав 433 — специальное подразделение полиции Израиля"}
+                subtitle={"Специальное подразделения полиции Израиля"}
+                title={"LAHAV 433 לַהַב"}
+                imgSrc={"/title-logo.png"}
             >
                 <ErrorElement />
             </WithTitleWrapper>

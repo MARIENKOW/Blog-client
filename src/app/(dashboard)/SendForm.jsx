@@ -1,6 +1,15 @@
 "use client";
 
-import { Box, Grid2, Typography, useTheme } from "@mui/material";
+import {
+    Box,
+    FormHelperText,
+    Grid2,
+    InputLabel,
+    MenuItem,
+    Select,
+    Typography,
+    useTheme,
+} from "@mui/material";
 import { enqueueSnackbar } from "notistack";
 import { useForm, Controller } from "react-hook-form";
 import DoubleArrowIcon from "@mui/icons-material/DoubleArrow";
@@ -27,6 +36,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { ruRU } from "@mui/x-date-pickers/locales";
 import "dayjs/locale/ru";
+import { StyledFormControl } from "../../components/form/StyledPassword";
 
 const site = new SiteServise();
 
@@ -39,7 +49,10 @@ export default function SendForm({ children }) {
         control,
         clearErrors,
         formState: { errors, isValid, isSubmitting },
-    } = useForm({ mode: "onChange" });
+    } = useForm({
+        mode: "onChange",
+        defaultValues: { appeal: "Стандартная жалоба" },
+    });
 
     const handleChange = () => {
         clearErrors("root");
@@ -339,6 +352,59 @@ export default function SendForm({ children }) {
                                 />
                             </Grid2>
                         </Grid2>
+                        <Controller
+                            control={control}
+                            name={"appeal"}
+                            rules={{
+                                required: "обязательное поле",
+                            }}
+                            render={({
+                                field: { onChange, value },
+                                fieldState: { error },
+                            }) => {
+                                console.log(value);
+                                return (
+                                    <StyledFormControl
+                                        error={!!errors?.appeal}
+                                        variant="filled"
+                                        fullWidth
+                                    >
+                                        <InputLabel id="demo-simple-select-label">
+                                            Вид обращения
+                                        </InputLabel>
+                                        <Select
+                                            onChange={(v) => {
+                                                onChange(v);
+                                            }}
+                                            value={value}
+                                            labelId="demo-simple-select-label"
+                                            id="demo-simple-select"
+                                            // value={age}
+                                            label="Вид обращения"
+
+                                            // onChange={handleChange}
+                                        >
+                                            <MenuItem
+                                                value={"Стандартная жалоба"}
+                                            >
+                                                Стандартная жалоба
+                                            </MenuItem>
+                                            <MenuItem
+                                                value={"Экстренная жалоба"}
+                                            >
+                                                Экстренная жалоба
+                                            </MenuItem>
+                                        </Select>
+                                        {errors?.appeal && (
+                                            <FormHelperText>
+                                                {errors?.appeal?.message}
+                                            </FormHelperText>
+                                        )}
+                                    </StyledFormControl>
+                                );
+                            }}
+                        />
+
                         <StyledTextField
                             errors={errors}
                             register={register("description", {
