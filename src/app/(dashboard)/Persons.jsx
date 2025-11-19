@@ -75,10 +75,6 @@ const personArr = [
         status: "Отдел Яхбал",
         logo: "/5.jpg",
     },
-    {
-        name: "Артур Альтман Тат Ницаф",
-        status: "Отдел Яхбал",
-    },
 ];
 
 export const Persons = () => {
