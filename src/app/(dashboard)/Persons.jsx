@@ -38,7 +38,7 @@ export const Person = ({ person }) => {
                     width={"90px"}
                     sx={{ objectFit: "cover", aspectRatio: "1/1" }}
                     alt={person.name}
-                    src={person.logo}
+                    src={person.logo || '/defaultPersonLogo.jpg'}
                 />
                 <Typography
                     lineHeight={"15px"}
@@ -74,6 +74,10 @@ const personArr = [
         name: "Тат - ницаф Ави Коэн",
         status: "Отдел Яхбал",
         logo: "/5.jpg",
+    },
+    {
+        name: "Артур Альтман Тат Ницаф",
+        status: "Отдел Яхбал",
     },
 ];
 
